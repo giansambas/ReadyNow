@@ -29,14 +29,18 @@
 </div>
 
   <div class="section feature-box">
-    <h3>Evacuation Centers Near You</h3>
-    <ul>
-      <li>Barangay Hall</li>
-      <li>Public School Gymnasium</li>
-      <li>Community Center</li>
-    </ul>
-  </div>
-</main>
+  <h3>Evacuation Centers Near You</h3>
+  <ul id="evacuation-list">
+    <li>Loading evacuation centers...</li>
+  </ul>
+</div>
+
+<div class="section feature-box">
+  <h3>Barangay Advisory</h3>
+  <p id="barangay-message">
+    Please follow official instructions from your barangay and local authorities.
+  </p>
+</div>
 
 </main>
 
@@ -48,11 +52,60 @@
   const params = new URLSearchParams(window.location.search);
   const city = params.get("city") || "Philippines";
 
+  // Update map focus
   const mapFrame = document.getElementById("map-frame");
   mapFrame.src =
     "https://www.google.com/maps?q=" +
     encodeURIComponent(city + " evacuation center") +
     "&output=embed";
+
+  // Evacuation centers by city (sample, realistic)
+  const evacuationData = {
+    "Davao City": [
+      "Barangay Hall – Talomo",
+      "Davao City National High School Gym",
+      "Mintal Evacuation Center"
+    ],
+    "Cebu City": [
+      "Cebu City Sports Center",
+      "Abellana National School Gym",
+      "Barangay Luz Covered Court"
+    ],
+    "Quezon City": [
+      "Quezon City Memorial Circle",
+      "Batasan Hills National High School",
+      "Barangay Commonwealth Hall"
+    ],
+    "Manila": [
+      "Rizal Memorial Sports Complex",
+      "Manila City Hall Evacuation Area",
+      "Barangay 176 Multi-purpose Hall"
+    ],
+    "Baguio": [
+      "Baguio Convention Center",
+      "University of Baguio Gym",
+      "Barangay Irisan Covered Court"
+    ]
+  };
+
+  const list = document.getElementById("evacuation-list");
+  list.innerHTML = "";
+
+  if (evacuationData[city]) {
+    evacuationData[city].forEach(place => {
+      const li = document.createElement("li");
+      li.textContent = place;
+      list.appendChild(li);
+    });
+  } else {
+    const li = document.createElement("li");
+    li.textContent = "Please check with your barangay for designated evacuation centers.";
+    list.appendChild(li);
+  }
+
+  // Barangay advisory message
+  document.getElementById("barangay-message").innerText =
+    "Always follow announcements and evacuation instructions issued by your barangay and local government unit (LGU).";
 </script>
 
 </body>
