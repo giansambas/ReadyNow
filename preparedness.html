@@ -17,7 +17,7 @@
 
 <main>
   <h1>Preparedness Guide</h1>
-
+<p id="location-text" class="section"></p>
   <div class="section feature-box">
     <h3>AI Guidance</h3>
     <p id="ai-output">Loading AI guidance...</p>
@@ -42,9 +42,9 @@
     </ul>
   </div>
 
-  <a href="map.html">
-    <button>View Evacuation Map</button>
-  </a>
+  <a id="map-link">
+  <button>View Evacuation Map</button>
+</a>
 </main>
 
 <footer>
@@ -54,6 +54,10 @@
 <script>
   const params = new URLSearchParams(window.location.search);
   const disaster = params.get("disaster");
+  const city = params.get("city");
+
+  document.getElementById("location-text").innerText =
+    "Preparedness guidance for " + city;
 
   let aiText = "General disaster preparedness guidance.";
 
@@ -66,6 +70,12 @@
   }
 
   document.getElementById("ai-output").innerText = aiText;
+</script>
+
+<script>
+  const mapParams = new URLSearchParams(window.location.search);
+  document.getElementById("map-link").href =
+    "map.html?" + mapParams.toString();
 </script>
 
 </body>

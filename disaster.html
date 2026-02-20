@@ -19,13 +19,16 @@
   <h1>Disaster Selection</h1>
 
   <div class="form-group">
-    <label>Select Location</label>
-    <select>
-      <option>Choose a location</option>
-      <option>City</option>
-      <option>Barangay</option>
-    </select>
-  </div>
+  <label>Select City</label>
+  <select id="city">
+    <option value="">Choose a city</option>
+    <option value="Manila">Manila</option>
+    <option value="Quezon City">Quezon City</option>
+    <option value="Cebu City">Cebu City</option>
+    <option value="Davao City">Davao City</option>
+    <option value="Baguio">Baguio</option>
+  </select>
+</div>
 
   <div class="form-group">
     <label>Select Disaster Type</label>
@@ -46,12 +49,17 @@
 
 <script>
   function goToPreparedness() {
+    const city = document.getElementById("city").value;
     const disaster = document.getElementById("disaster").value;
-    if (!disaster) {
-      alert("Please select a disaster type.");
+
+    if (!city || !disaster) {
+      alert("Please select both a city and a disaster type.");
       return;
     }
-    window.location.href = "preparedness.html?disaster=" + disaster;
+
+    window.location.href =
+      "preparedness.html?city=" + encodeURIComponent(city) +
+      "&disaster=" + disaster;
   }
 </script>
 
