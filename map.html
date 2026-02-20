@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Evacuation Map - ReadyNow</title>
+  <title>Evacuation Map</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,18 +18,22 @@
 <main>
   <h1>Evacuation Map</h1>
 
-  <div class="section">
-    <div style="height: 300px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center;">
-      <p>Map placeholder</p>
-    </div>
+  <div class="section feature-box">
+    <iframe
+      src="https://www.google.com/maps?q=evacuation+center+near+me&output=embed"
+      width="100%"
+      height="300"
+      style="border:0;"
+      loading="lazy">
+    </iframe>
   </div>
 
-  <div class="section">
+  <div class="section feature-box">
     <h3>Evacuation Centers Near You</h3>
     <ul>
-      <li>Community Center A</li>
-      <li>School Gymnasium</li>
       <li>Barangay Hall</li>
+      <li>Public School Gymnasium</li>
+      <li>Community Center</li>
     </ul>
   </div>
 </main>

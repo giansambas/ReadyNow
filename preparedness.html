@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Preparedness Guide - ReadyNow</title>
+  <title>Preparedness Guide</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,29 +18,27 @@
 <main>
   <h1>Preparedness Guide</h1>
 
-  <div class="section">
+  <div class="section feature-box">
     <h3>AI Guidance</h3>
-    <p>
-      Based on your selected location and disaster type, ReadyNow provides
-      general preparedness guidance to help you stay safe.
-    </p>
+    <p id="ai-output">Loading AI guidance...</p>
   </div>
 
-  <div class="section">
+  <div class="section feature-box">
     <h3>Preparedness Checklist</h3>
     <ul>
-      <li>Emergency kit</li>
+      <li>Emergency go-bag</li>
       <li>Food and water supplies</li>
       <li>Important documents</li>
+      <li>Charged mobile devices</li>
     </ul>
   </div>
 
-  <div class="section">
+  <div class="section feature-box">
     <h3>Safety Tips</h3>
     <ul>
-      <li>Stay informed through official sources</li>
-      <li>Know your evacuation routes</li>
-      <li>Follow local authorities</li>
+      <li>Monitor official announcements</li>
+      <li>Know evacuation routes</li>
+      <li>Assist vulnerable individuals</li>
     </ul>
   </div>
 
@@ -52,6 +50,23 @@
 <footer>
   <p>ReadyNow © 2026</p>
 </footer>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const disaster = params.get("disaster");
+
+  let aiText = "General disaster preparedness guidance.";
+
+  if (disaster === "flood") {
+    aiText = "AI Advice: Move valuables to higher ground, prepare sandbags, and avoid flooded areas.";
+  } else if (disaster === "earthquake") {
+    aiText = "AI Advice: Secure heavy furniture, prepare emergency supplies, and identify safe spots indoors.";
+  } else if (disaster === "typhoon") {
+    aiText = "AI Advice: Reinforce windows, stock food and water, and stay updated with weather alerts.";
+  }
+
+  document.getElementById("ai-output").innerText = aiText;
+</script>
 
 </body>
 </html>

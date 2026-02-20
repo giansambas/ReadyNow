@@ -77,3 +77,10 @@ select {
 .section {
   margin-bottom: 30px;
 }
+
+.feature-box {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 6px;
+}

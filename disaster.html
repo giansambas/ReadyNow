@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Disaster Selection - ReadyNow</title>
+  <title>Disaster Selection</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -29,23 +29,31 @@
 
   <div class="form-group">
     <label>Select Disaster Type</label>
-    <select>
-      <option>Choose a disaster</option>
-      <option>Flood</option>
-      <option>Earthquake</option>
-      <option>Typhoon</option>
+    <select id="disaster">
+      <option value="">Choose a disaster</option>
+      <option value="flood">Flood</option>
+      <option value="earthquake">Earthquake</option>
+      <option value="typhoon">Typhoon</option>
     </select>
   </div>
 
-<a href="preparedness.html">
-  <button>Continue</button>
-</a>
-
+  <button onclick="goToPreparedness()">Continue</button>
 </main>
 
 <footer>
   <p>ReadyNow © 2026</p>
 </footer>
+
+<script>
+  function goToPreparedness() {
+    const disaster = document.getElementById("disaster").value;
+    if (!disaster) {
+      alert("Please select a disaster type.");
+      return;
+    }
+    window.location.href = "preparedness.html?disaster=" + disaster;
+  }
+</script>
 
 </body>
 </html>
