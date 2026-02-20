@@ -52,14 +52,12 @@
   const params = new URLSearchParams(window.location.search);
   const city = params.get("city") || "Philippines";
 
-  // Update map focus
   const mapFrame = document.getElementById("map-frame");
   mapFrame.src =
     "https://www.google.com/maps?q=" +
     encodeURIComponent(city + " evacuation center") +
     "&output=embed";
 
-  // Evacuation centers by city (sample, realistic)
   const evacuationData = {
     "Davao City": [
       "Barangay Hall – Talomo",
@@ -103,7 +101,6 @@
     list.appendChild(li);
   }
 
-  // Barangay advisory message
   document.getElementById("barangay-message").innerText =
     "Always follow announcements and evacuation instructions issued by your barangay and local government unit (LGU).";
 </script>
