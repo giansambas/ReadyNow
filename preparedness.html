@@ -8,7 +8,11 @@
 <body>
 
 <header>
-  <h2>ReadyNow</h2>
+  <h2>
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      ReadyNow
+    </a>
+  </h2>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -17,17 +21,21 @@
 
 <main>
   <h1>Preparedness Guide</h1>
-<p id="location-text" class="section"></p>
+  <p id="location-text" class="section"></p>
+
+  <!-- AI GUIDANCE -->
   <div class="section feature-box">
     <h3>Guidance</h3>
     <p id="ai-output">Loading guidance...</p>
   </div>
 
+  <!-- WEATHER -->
   <div class="section feature-box">
-  <h3>Current Weather</h3>
-  <p id="weather-prep">Loading weather data...</p>
-</div>
+    <h3>Current Weather</h3>
+    <p id="weather-prep">Loading weather data...</p>
+  </div>
 
+  <!-- CHECKLIST -->
   <div class="section feature-box">
     <h3>Preparedness Checklist</h3>
     <ul>
@@ -38,6 +46,7 @@
     </ul>
   </div>
 
+  <!-- SAFETY TIPS -->
   <div class="section feature-box">
     <h3>Safety Tips</h3>
     <ul>
@@ -47,9 +56,10 @@
     </ul>
   </div>
 
+  <!-- MAP LINK -->
   <a id="map-link">
-  <button>View Evacuation Map</button>
-</a>
+    <button>View Evacuation Map</button>
+  </a>
 </main>
 
 <footer>
@@ -57,50 +67,53 @@
 </footer>
 
 <script>
+  // Read URL parameters
   const params = new URLSearchParams(window.location.search);
   const disaster = params.get("disaster");
-  const city = params.get("city");
+  const city = params.get("city") || "Manila";
 
+  // Display location
   document.getElementById("location-text").innerText =
     "Preparedness guidance for " + city;
 
+  /* -------- AI GUIDANCE -------- */
   let aiText = "General disaster preparedness guidance.";
 
   if (disaster === "flood") {
-    aiText = "Advice: Move valuables to higher ground, prepare sandbags, and avoid flooded areas.";
+    aiText =
+      "Advice: Move valuables to higher ground, prepare sandbags, and avoid flooded areas.";
   } else if (disaster === "earthquake") {
-    aiText = "Advice: Secure heavy furniture, prepare emergency supplies, and identify safe spots indoors.";
+    aiText =
+      "Advice: Secure heavy furniture, prepare emergency supplies, and identify safe spots indoors.";
   } else if (disaster === "typhoon") {
-    aiText = "Advice: Reinforce windows, stock food and water, and stay updated with weather alerts.";
+    aiText =
+      "Advice: Reinforce windows, stock food and water, and stay updated with weather alerts.";
   }
 
   document.getElementById("ai-output").innerText = aiText;
 
-// WEATHER (Preparedness Page)
-const weatherPrep = document.getElementById("weather-prep");
+  /* -------- WEATHER -------- */
+  const weatherPrep = document.getElementById("weather-prep");
 
-fetch(
-  `https://api.openweathermap.org/data/2.5/weather?q=${city},PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136`
-)
-  .then(response => response.json())
-  .then(data => {
-    if (data.main) {
-      weatherPrep.innerText =
-        `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
-    } else {
-      weatherPrep.innerText = "Weather data unavailable.";
-    }
-  })
-  .catch(() => {
-    weatherPrep.innerText = "Unable to load weather data.";
-  });
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136`
+  )
+    .then(response => response.json())
+    .then(data => {
+      if (data.main) {
+        weatherPrep.innerText =
+          `Weather in ${city}: ${data.main.temp}°C, ${data.weather[0].description}`;
+      } else {
+        weatherPrep.innerText = "Weather data unavailable.";
+      }
+    })
+    .catch(() => {
+      weatherPrep.innerText = "Unable to load weather data.";
+    });
 
-</script>
-
-<script>
-  const mapParams = new URLSearchParams(window.location.search);
+  /* -------- MAP LINK -------- */
   document.getElementById("map-link").href =
-    "map.html?" + mapParams.toString();
+    "map.html?" + params.toString();
 </script>
 
 </body>
