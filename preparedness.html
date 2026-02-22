@@ -24,6 +24,11 @@
   </div>
 
   <div class="section feature-box">
+  <h3>Current Weather</h3>
+  <p id="weather-prep">Loading weather data...</p>
+</div>
+
+  <div class="section feature-box">
     <h3>Preparedness Checklist</h3>
     <ul>
       <li>Emergency go-bag</li>
@@ -70,6 +75,26 @@
   }
 
   document.getElementById("ai-output").innerText = aiText;
+
+// WEATHER (Preparedness Page)
+const weatherPrep = document.getElementById("weather-prep");
+
+fetch(
+  `https://api.openweathermap.org/data/2.5/weather?q=${city},PH&units=metric&appid=YOUR_API_KEY_HERE`
+)
+  .then(response => response.json())
+  .then(data => {
+    if (data.main) {
+      weatherPrep.innerText =
+        `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
+    } else {
+      weatherPrep.innerText = "Weather data unavailable.";
+    }
+  })
+  .catch(() => {
+    weatherPrep.innerText = "Unable to load weather data.";
+  });
+
 </script>
 
 <script>

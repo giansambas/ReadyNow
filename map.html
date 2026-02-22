@@ -19,6 +19,11 @@
   <h1>Evacuation Map</h1>
 
   <div class="section feature-box">
+  <h3>Current Weather</h3>
+  <p id="weather-map">Loading weather data...</p>
+</div>
+
+  <div class="section feature-box">
   <iframe
     id="map-frame"
     width="100%"
@@ -110,6 +115,26 @@
 
   document.getElementById("barangay-message").innerText =
     "Always follow announcements and evacuation instructions issued by your barangay and local government unit (LGU).";
+
+// WEATHER (Map Page)
+const weatherMap = document.getElementById("weather-map");
+
+fetch(
+  `https://api.openweathermap.org/data/2.5/weather?q=${city},PH&units=metric&appid=YOUR_API_KEY_HERE`
+)
+  .then(response => response.json())
+  .then(data => {
+    if (data.main) {
+      weatherMap.innerText =
+        `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
+    } else {
+      weatherMap.innerText = "Weather data unavailable.";
+    }
+  })
+  .catch(() => {
+    weatherMap.innerText = "Unable to load weather data.";
+  });
+
 </script>
 
 <p style="font-size: 14px; color: #666;">
