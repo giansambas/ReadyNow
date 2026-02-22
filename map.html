@@ -119,9 +119,7 @@
 // WEATHER (Map Page)
 const weatherMap = document.getElementById("weather-map");
 
-fetch(
-  `https://api.openweathermap.org/data/2.5/weather?q=${city},PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136`
-)
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136`)
   .then(response => response.json())
   .then(data => {
     if (data.main) {
