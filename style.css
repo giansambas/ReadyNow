@@ -1,4 +1,4 @@
-/* GENERAL RESET */
+/* ========== BASE RESET ========== */
 * {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
@@ -6,15 +6,14 @@
 
 body {
   margin: 0;
-  background-color: #f4f4f4;
-  color: #000;
+  background-color: #f4f2f2;
+  color: #1a1a1a;
 }
 
-/* HEADER */
+/* ========== HEADER ========== */
 header {
-  background-color: #fff;
-  padding: 14px 24px;
-  border-bottom: 1px solid #ccc;
+  background-color: #6b1f2b; /* Burgundy */
+  padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,10 +24,15 @@ header h2 {
   font-size: 20px;
 }
 
+header h2 a {
+  color: #fff;
+  text-decoration: none;
+}
+
 header nav a {
   margin-left: 16px;
   text-decoration: none;
-  color: #000;
+  color: #f5dede;
   font-size: 14px;
 }
 
@@ -36,94 +40,115 @@ header nav a:hover {
   text-decoration: underline;
 }
 
-/* MAIN LAYOUT */
+/* ========== MAIN LAYOUT ========== */
 main {
-  max-width: 800px;
-  margin: 32px auto;
+  max-width: 900px;
+  margin: 40px auto;
   padding: 0 20px;
 }
 
 h1 {
   margin-bottom: 20px;
+  color: #6b1f2b;
 }
 
-/* CARD SECTIONS */
-.section,
-.feature-box {
-  background-color: #fff;
-  padding: 16px 18px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-/* CENTERED INTRO (HOME PAGE) */
+/* ========== INTRO (HOME) ========== */
 .intro {
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
 }
 
-/* CENTERED ABOUT PAGE */
-.about-content {
-  text-align: center;
-  line-height: 1.6;
-}
-
-/* FORMS */
-.form-group {
+.intro h1 {
+  font-size: 32px;
   margin-bottom: 16px;
+}
+
+.intro p {
+  max-width: 650px;
+  margin: 0 auto 28px auto;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* ========== CARDS / SECTIONS ========== */
+.section,
+.feature-box {
+  background-color: #ffffff;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  border-left: 6px solid #6b1f2b;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ========== FORMS ========== */
+.form-group {
+  margin-bottom: 18px;
 }
 
 label {
   display: block;
   margin-bottom: 6px;
   font-size: 14px;
+  font-weight: bold;
 }
 
 select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
   border: 1px solid #aaa;
   background-color: #fff;
 }
 
-/* BUTTONS (MONOCHROME) */
+/* ========== BUTTONS ========== */
 button {
-  background-color: #000;
+  background-color: #6b1f2b;
   color: #fff;
   border: none;
-  padding: 10px 16px;
+  padding: 12px 20px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
 }
 
 button:hover {
-  opacity: 0.85;
+  background-color: #571923;
 }
 
-/* LISTS */
+/* ========== LISTS ========== */
 ul {
   padding-left: 20px;
 }
 
 li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-/* FOOTER */
+/* ========== ABOUT PAGE CENTERING ========== */
+.about-content {
+  text-align: center;
+  line-height: 1.6;
+}
+
+.about-content ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+/* ========== FOOTER ========== */
 footer {
   text-align: center;
   font-size: 13px;
-  color: #333;
-  padding: 20px 0;
-  margin-top: 40px;
+  color: #555;
+  padding: 24px 0;
+  margin-top: 50px;
+  border-top: 1px solid #ccc;
 }
 
-/* SMALL INFO TEXT */
+/* ========== SMALL INFO TEXT ========== */
 small,
 p[style*="color"] {
   font-size: 13px;
-  color: #555;
+  color: #666;
 }
