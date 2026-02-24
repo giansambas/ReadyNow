@@ -1,86 +1,116 @@
+/* GENERAL RESET */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fafafa;
+  margin: 0;
+  background-color: #f5f7fa;
   color: #333;
 }
 
+/* HEADER */
 header {
+  background-color: #ffffff;
+  padding: 14px 24px;
+  border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
-  border-bottom: 1px solid #ccc;
-  background: #fff;
 }
 
-nav a {
+header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+header nav a {
   margin-left: 16px;
   text-decoration: none;
   color: #333;
-  font-weight: 500;
+  font-size: 14px;
 }
 
-nav a:hover {
+header nav a:hover {
   text-decoration: underline;
 }
 
+/* MAIN LAYOUT */
 main {
-  padding: 40px;
-  min-height: 80vh;
+  max-width: 800px;
+  margin: 32px auto;
+  padding: 0 20px;
 }
 
-footer {
-  padding: 16px;
-  border-top: 1px solid #ccc;
-  text-align: center;
-  background: #fff;
-}
-
-button {
-  padding: 12px 24px;
-  font-size: 16px;
-  cursor: pointer;
-  border: 1px solid #333;
-  background: #fff;
-}
-
-button:hover {
-  background: #f0f0f0;
-}
-
-.form-group {
+h1 {
   margin-bottom: 20px;
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
+}
+
+/* CARD SECTIONS */
+.section,
+.feature-box {
+  background-color: #ffffff;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+/* FORMS */
+.form-group {
+  margin-bottom: 16px;
 }
 
 label {
+  display: block;
   margin-bottom: 6px;
-  font-weight: 500;
+  font-size: 14px;
 }
 
 select {
+  width: 100%;
   padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
-.center {
+/* BUTTONS */
+button {
+  background-color: #4a7c59;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #3d684c;
+}
+
+/* LISTS */
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+/* FOOTER */
+footer {
   text-align: center;
+  font-size: 13px;
+  color: #666;
+  padding: 20px 0;
+  margin-top: 40px;
 }
 
-.section {
-  margin-bottom: 30px;
-}
-
-.feature-box {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 6px;
+/* SMALL INFO TEXT */
+small,
+p[style*="color"] {
+  font-size: 13px;
+  color: #666;
 }
