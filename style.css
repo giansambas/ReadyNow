@@ -6,15 +6,15 @@
 
 body {
   margin: 0;
-  background-color: #f5f7fa;
-  color: #333;
+  background-color: #f4f4f4;
+  color: #000;
 }
 
 /* HEADER */
 header {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 14px 24px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +28,7 @@ header h2 {
 header nav a {
   margin-left: 16px;
   text-decoration: none;
-  color: #333;
+  color: #000;
   font-size: 14px;
 }
 
@@ -50,11 +50,23 @@ h1 {
 /* CARD SECTIONS */
 .section,
 .feature-box {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 16px 18px;
   margin-bottom: 16px;
-  border-radius: 6px;
-  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* CENTERED INTRO (HOME PAGE) */
+.intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* CENTERED ABOUT PAGE */
+.about-content {
+  text-align: center;
+  line-height: 1.6;
 }
 
 /* FORMS */
@@ -72,12 +84,13 @@ select {
   width: 100%;
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
+  background-color: #fff;
 }
 
-/* BUTTONS */
+/* BUTTONS (MONOCHROME) */
 button {
-  background-color: #4a7c59;
+  background-color: #000;
   color: #fff;
   border: none;
   padding: 10px 16px;
@@ -87,7 +100,7 @@ button {
 }
 
 button:hover {
-  background-color: #3d684c;
+  opacity: 0.85;
 }
 
 /* LISTS */
@@ -103,7 +116,7 @@ li {
 footer {
   text-align: center;
   font-size: 13px;
-  color: #666;
+  color: #333;
   padding: 20px 0;
   margin-top: 40px;
 }
@@ -112,5 +125,5 @@ footer {
 small,
 p[style*="color"] {
   font-size: 13px;
-  color: #666;
+  color: #555;
 }
