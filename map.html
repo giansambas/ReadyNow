@@ -8,11 +8,7 @@
 <body>
 
 <header>
-  <h2>
-    <a href="index.html" style="text-decoration: none; color: inherit;">
-      ReadyNow
-    </a>
-  </h2>
+  <h2><a href="index.html" class="logo-link">ReadyNow</a></h2>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -20,44 +16,32 @@
 </header>
 
 <main>
-  <h1>Evacuation Map</h1>
+  <h1>Evacuation Centers – Quezon City</h1>
 
-  <!-- WEATHER -->
-  <div class="section feature-box">
-    <h3>Current Weather</h3>
-    <p id="weather-map">Loading weather data...</p>
-  </div>
-
-  <!-- MAP -->
   <div class="section feature-box">
     <iframe
-      id="map-frame"
       width="100%"
-      height="300"
+      height="350"
       style="border:0;"
-      loading="lazy">
+      loading="lazy"
+      src="https://www.google.com/maps?q=Quezon City evacuation centers&output=embed">
     </iframe>
   </div>
 
-  <!-- EVACUATION CENTERS -->
   <div class="section feature-box">
-    <h3>Evacuation Centers Near You</h3>
-    <ul id="evacuation-list">
-      <li>Loading evacuation centers...</li>
+    <h3>Official Evacuation Centers (District 1)</h3>
+    <ul id="evacuation-list"></ul>
+  </div>
+
+  <div class="section feature-box">
+    <h3>Emergency Contacts – QC DRRMO</h3>
+    <ul>
+      <li>Helpline 122</li>
+      <li>8988-4242 local 8038</li>
+      <li>0947-885-9929</li>
+      <li>0947-884-7498</li>
     </ul>
   </div>
-
-  <!-- BARANGAY ADVISORY -->
-  <div class="section feature-box">
-    <h3>Barangay Advisory</h3>
-    <p id="barangay-message">
-      Please follow official instructions from your barangay and local authorities.
-    </p>
-  </div>
-
-  <p style="font-size: 14px; color: #666;">
-    Note: Listed evacuation centers are examples. Always confirm with your barangay or LGU.
-  </p>
 </main>
 
 <footer>
@@ -65,90 +49,26 @@
 </footer>
 
 <script>
-  // Read URL parameters
-  const params = new URLSearchParams(window.location.search);
-  const city = params.get("city") || "Manila";
-
-  /* ---------------- MAP ---------------- */
-  const mapFrame = document.getElementById("map-frame");
-  mapFrame.src =
-    "https://www.google.com/maps?q=" +
-    encodeURIComponent(city + " evacuation center") +
-    "&output=embed";
-
-  /* -------- EVACUATION CENTERS -------- */
-  const evacuationData = {
-    "Manila": [
-      "Rizal Memorial Sports Complex",
-      "Manila City Hall Evacuation Area",
-      "Barangay 176 Multi-purpose Hall"
-    ],
-    "Quezon City": [
-      "Quezon City Memorial Circle",
-      "Batasan Hills National High School",
-      "Barangay Commonwealth Hall"
-    ],
-    "Makati": [
-      "University of Makati Gym",
-      "Makati City Hall Evacuation Area"
-    ],
-    "Cebu City": [
-      "Cebu City Sports Center",
-      "Abellana National School Gym",
-      "Barangay Luz Covered Court"
-    ],
-    "Iloilo City": [
-      "Iloilo Sports Complex",
-      "Iloilo National High School Gym"
-    ],
-    "Tacloban": [
-      "Tacloban City Convention Center",
-      "Astrodome Evacuation Area"
-    ],
-    "Davao City": [
-      "Davao City National High School Gym",
-      "Mintal Evacuation Center",
-      "Talomo Barangay Hall"
-    ]
-  };
+  const evacuationData = [
+    { barangay: "Alicia", facility: "Brgy Alicia Hall – 3rd Floor" },
+    { barangay: "Bagong Pag-asa", facility: "Multipurpose Covered Court" },
+    { barangay: "Bahay Toro", facility: "Toro Hills Elementary School" },
+    { barangay: "Balingasa", facility: "Barangay Hall Covered Court" },
+    { barangay: "Bungad", facility: "Barangay Bungad Covered Court" },
+    { barangay: "Damar", facility: "Multi-Purpose Hall" },
+    { barangay: "Del Monte", facility: "San Francisco Elementary School" },
+    { barangay: "Project 6", facility: "Project 6 Elementary School" },
+    { barangay: "San Antonio", facility: "San Antonio De Padua Parish Church" },
+    { barangay: "San Jose", facility: "San Jose Elementary School" }
+  ];
 
   const list = document.getElementById("evacuation-list");
-  list.innerHTML = "";
 
-  if (evacuationData[city]) {
-    evacuationData[city].forEach(place => {
-      const li = document.createElement("li");
-      li.textContent = place;
-      list.appendChild(li);
-    });
-  } else {
+  evacuationData.forEach(center => {
     const li = document.createElement("li");
-    li.textContent =
-      "Please check with your barangay for designated evacuation centers.";
+    li.innerText = `${center.barangay} – ${center.facility}`;
     list.appendChild(li);
-  }
-
-  document.getElementById("barangay-message").innerText =
-    "Always follow announcements and evacuation instructions issued by your barangay and local government unit (LGU).";
-
-  /* -------------- WEATHER -------------- */
-  const weatherMap = document.getElementById("weather-map");
-
-  fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)},PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136`
-  )
-    .then(response => response.json())
-    .then(data => {
-      if (data.main) {
-        weatherMap.innerText =
-          `Weather in ${city}: ${data.main.temp}°C, ${data.weather[0].description}`;
-      } else {
-        weatherMap.innerText = "Weather data unavailable.";
-      }
-    })
-    .catch(() => {
-      weatherMap.innerText = "Unable to load weather data.";
-    });
+  });
 </script>
 
 </body>

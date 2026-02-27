@@ -8,11 +8,7 @@
 <body>
 
 <header>
-  <h2>
-    <a href="index.html" style="text-decoration: none; color: inherit;">
-      ReadyNow
-    </a>
-  </h2>
+  <h2><a href="index.html" class="logo-link">ReadyNow</a></h2>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -22,35 +18,19 @@
 <main>
   <h1>Disaster Selection</h1>
 
-  <div class="form-group">
-    <label>Select City</label>
-    <select id="city">
-      <option value="">Choose a city</option>
-
-      <!-- ALPHABETICAL ORDER -->
-      <option value="Baguio">Baguio</option>
-      <option value="Cagayan de Oro">Cagayan de Oro</option>
-      <option value="Cebu City">Cebu City</option>
-      <option value="Dagupan">Dagupan</option>
-      <option value="Davao City">Davao City</option>
-      <option value="General Santos">General Santos</option>
-      <option value="Iloilo City">Iloilo City</option>
-      <option value="Makati">Makati</option>
-      <option value="Manila">Manila</option>
-      <option value="Olongapo">Olongapo</option>
-      <option value="Pasig">Pasig</option>
-      <option value="Quezon City">Quezon City</option>
-      <option value="Tacloban">Tacloban</option>
-    </select>
-  </div>
+  <p class="section">
+    Location: <strong>Quezon City</strong>
+  </p>
 
   <div class="form-group">
     <label>Select Disaster Type</label>
     <select id="disaster">
       <option value="">Choose a disaster</option>
-      <option value="earthquake">Earthquake</option>
-      <option value="flood">Flood</option>
-      <option value="typhoon">Typhoon</option>
+      <option value="typhoon">Typhoon (Bagyo)</option>
+      <option value="earthquake">Earthquake (Lindol)</option>
+      <option value="flood">Flood (Baha)</option>
+      <option value="fire">Fire (Sunog)</option>
+      <option value="landslide">Landslide (Pagguho ng Lupa)</option>
     </select>
   </div>
 
@@ -63,17 +43,15 @@
 
 <script>
   function goToPreparedness() {
-    const city = document.getElementById("city").value;
     const disaster = document.getElementById("disaster").value;
 
-    if (!city || !disaster) {
-      alert("Please select both a city and a disaster type.");
+    if (!disaster) {
+      alert("Please select a disaster type.");
       return;
     }
 
     window.location.href =
-      "preparedness.html?city=" + encodeURIComponent(city) +
-      "&disaster=" + disaster;
+      "preparedness.html?disaster=" + disaster;
   }
 </script>
 
