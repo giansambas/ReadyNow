@@ -47,8 +47,8 @@ const params = new URLSearchParams(window.location.search);
 const barangay = params.get("barangay");
 
 // =============================
-// EVACUATION CENTER DATA
-// (Add more later if needed)
+// EVACUATION CENTER DATA (SAMPLE)
+// Add the rest later
 // =============================
 const evacuationData = {
 
@@ -80,8 +80,6 @@ const evacuationData = {
   "Freedom Park Covered Court"
 ]
 
-// ADD MORE BARANGAYS BELOW SAME FORMAT
-
 };
 
 // =============================
@@ -98,8 +96,17 @@ if (!barangay) {
   fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
   .then(res => res.json())
   .then(data => {
+    if (data.main) {
+      document.getElementById("weather").innerText =
+        `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
+    } else {
+      document.getElementById("weather").innerText =
+        "Weather data unavailable.";
+    }
+  })
+  .catch(() => {
     document.getElementById("weather").innerText =
-      `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
+      "Unable to load weather data.";
   });
 
   // =============================
@@ -109,18 +116,25 @@ if (!barangay) {
     `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
 
   // =============================
-  // DISPLAY FACILITIES
+  // DISPLAY FACILITIES (FIXED MATCHING)
   // =============================
+  const cleanBarangay = barangay.trim().toLowerCase();
+
+  const matchedKey = Object.keys(evacuationData).find(
+    key => key.toLowerCase() === cleanBarangay
+  );
+
   const list = document.getElementById("facilityList");
 
-  if (evacuationData[barangay]) {
-    evacuationData[barangay].forEach(place => {
+  if (matchedKey) {
+    evacuationData[matchedKey].forEach(place => {
       const li = document.createElement("li");
       li.textContent = place;
       list.appendChild(li);
     });
   } else {
-    list.innerHTML = "<li>No evacuation centers listed yet for this barangay.</li>";
+    list.innerHTML =
+      "<li>No evacuation centers listed yet for this barangay.</li>";
   }
 
 }
