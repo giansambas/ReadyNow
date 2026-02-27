@@ -3,45 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Select Location – ReadyNow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h2 onclick="window.location.href='index.html'" style="cursor:pointer;">
-    ReadyNow
-  </h2>
+<header class="main-header">
+  <div class="logo">ReadyNow</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </nav>
 </header>
 
-<main>
-<h1>Select Your Location</h1>
+<main class="page-container">
+  <section class="hero">
+    <h1>Select Your Location</h1>
+    <p>Choose your district and barangay to view evacuation information.</p>
+  </section>
 
-<div class="card">
-  <h2>Select Your Location</h2>
+  <section class="card">
+    <label>District</label>
+    <select id="districtSelect">
+      <option value="">Choose District</option>
+      <option>District 1</option>
+      <option>District 2</option>
+      <option>District 3</option>
+      <option>District 4</option>
+      <option>District 5</option>
+      <option>District 6</option>
+    </select>
 
-  <label>District</label>
-  <select id="districtSelect">
-    <option value="">Choose District</option>
-    <option>District 1</option>
-    <option>District 2</option>
-    <option>District 3</option>
-    <option>District 4</option>
-    <option>District 5</option>
-    <option>District 6</option>
-  </select>
+    <label>Barangay</label>
+    <select id="barangaySelect">
+      <option value="">Choose Barangay</option>
+    </select>
 
-  <label>Barangay</label>
-  <select id="barangaySelect">
-    <option value="">Choose Barangay</option>
-  </select>
+    <label>Search Barangay (if unsure)</label>
+    <input type="text" id="searchInput" placeholder="Type barangay name...">
 
-  <label>Search Barangay (if unsure)</label>
-  <input type="text" id="searchInput" placeholder="Type barangay name..." />
-
-  <br><br>
-  <button onclick="goToMap()">View Evacuation Map</button>
-</div>
-
+    <br><br>
+    <button onclick="goToMap()">View Evacuation Map</button>
+  </section>
 </main>
 
 <script>

@@ -3,41 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Evacuation Map – ReadyNow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h2 onclick="window.location.href='index.html'" style="cursor:pointer;">
-    ReadyNow
-  </h2>
+<header class="main-header">
+  <div class="logo">ReadyNow</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </nav>
 </header>
 
-<main>
-<h1>Evacuation Map</h1>
+<main class="page-container">
+  <section class="hero">
+    <h1>Evacuation Information</h1>
+    <p>Stay informed. Stay prepared. Stay safe.</p>
+  </section>
 
-<div class="card">
-  <h2>Current Weather – Quezon City</h2>
-  <div id="weatherVisual">
-    <p id="weather">Loading...</p>
-  </div>
-</div>
+  <section class="info-grid">
+    <div class="card weather-card">
+      <h2>Current Weather</h2>
+      <p id="weather">Loading...</p>
+    </div>
 
-<div class="card">
-  <iframe
-    id="mapFrame"
-    width="100%"
-    height="400"
-    style="border:0"
-    loading="lazy">
-  </iframe>
-</div>
+    <div class="card location-card">
+      <h2>Selected Location</h2>
+      <p><strong>Barangay:</strong> <span id="selectedBarangay"></span></p>
+      <p><strong>District:</strong> <span id="selectedDistrict"></span></p>
+    </div>
+  </section>
 
-<div class="card">
-  <h3>Evacuation Facilities</h3>
-  <ul id="facilityList"></ul>
-</div>
+  <section class="card map-container">
+    <h2>Evacuation Map</h2>
+    <iframe id="mapFrame"></iframe>
+  </section>
 
+  <section class="card">
+    <h2>Evacuation Facilities</h2>
+    <ul id="facilityList"></ul>
+  </section>
 </main>
 
 <script>
@@ -45,6 +51,9 @@
 
 const params = new URLSearchParams(window.location.search);
 const barangay = params.get("barangay");
+const district = params.get("district");
+document.getElementById("selectedBarangay").innerText = barangay || "-";
+document.getElementById("selectedDistrict").innerText = district || "-";
 
 
 const evacuationData = {
