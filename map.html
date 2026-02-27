@@ -40,14 +40,61 @@
 
 <script>
 
+// =============================
+// GET URL PARAMETERS
+// =============================
 const params = new URLSearchParams(window.location.search);
 const barangay = params.get("barangay");
 
+// =============================
+// EVACUATION CENTER DATA
+// (Add more later if needed)
+// =============================
+const evacuationData = {
+
+"Payatas": [
+  "Multi-Purpose Hall",
+  "Payatas Phase 2 Covered Court",
+  "Payatas Phase 4 Covered Court",
+  "Golden Shower Covered Court",
+  "Plaza Dos Covered Court",
+  "Bulacan St. Barangay Hall Covered Court",
+  "Payatas Livelihood Building",
+  "Talisay Covered Court"
+],
+
+"Bagong Silangan": [
+  "Bagong Silangan Elementary School",
+  "Bagong Silangan High School",
+  "Bona Multipurpose Hall",
+  "Brookside Evacuation Site",
+  "Clemencia Evacuation Center",
+  "Fil-Heights Club House"
+],
+
+"Batasan Hills": [
+  "Batasan National High School",
+  "San Diego Elementary School",
+  "President Corazon Aquino Elementary School",
+  "Area A-3 Covered Court",
+  "Freedom Park Covered Court"
+]
+
+// ADD MORE BARANGAYS BELOW SAME FORMAT
+
+};
+
+// =============================
+// IF NO BARANGAY SELECTED
+// =============================
 if (!barangay) {
   document.querySelector("main").innerHTML =
     "<h2>No barangay selected.</h2><p>Please go back and choose a district and barangay.</p>";
 } else {
 
+  // =============================
+  // WEATHER
+  // =============================
   fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
   .then(res => res.json())
   .then(data => {
@@ -55,8 +102,27 @@ if (!barangay) {
       `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
   });
 
+  // =============================
+  // MAP
+  // =============================
   document.getElementById("mapFrame").src =
     `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
+
+  // =============================
+  // DISPLAY FACILITIES
+  // =============================
+  const list = document.getElementById("facilityList");
+
+  if (evacuationData[barangay]) {
+    evacuationData[barangay].forEach(place => {
+      const li = document.createElement("li");
+      li.textContent = place;
+      list.appendChild(li);
+    });
+  } else {
+    list.innerHTML = "<li>No evacuation centers listed yet for this barangay.</li>";
+  }
+
 }
 
 </script>
