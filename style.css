@@ -179,13 +179,20 @@ main{
   box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
 
-button{
-  background:#7a1f2b;
-  color:white;
-  padding:12px 20px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
+button {
+  background: #a8323e;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #7b1e2b;
+  transform: translateY(-2px);
 }
 
 body {
@@ -286,4 +293,80 @@ select:focus, input:focus {
 
 @keyframes listFade {
   to { opacity: 1; transform: translateY(0); }
+}
+
+.page-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #6c757d;
+  font-size: 18px;
+}
+
+/* GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* CARDS */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* WEATHER CARD SPECIAL */
+.weather-card {
+  background: linear-gradient(135deg, #ffffff, #f4f6f9);
+}
+
+/* MAP */
+.map-container iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 12px;
+  border: none;
+}
+
+/* EVAC LIST */
+#facilityList {
+  padding-left: 0;
+  list-style: none;
+}
+
+#facilityList li {
+  padding: 14px;
+  margin-bottom: 10px;
+  background: #f8f9fb;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+#facilityList li:hover {
+  background: #a8323e;
+  color: white;
+  transform: translateX(5px);
 }
