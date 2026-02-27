@@ -43,17 +43,21 @@
 const params = new URLSearchParams(window.location.search);
 const barangay = params.get("barangay");
 
-// WEATHER
-fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
-.then(res => res.json())
-.then(data => {
-  document.getElementById("weather").innerText =
-    `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
-});
+if (!barangay) {
+  document.querySelector("main").innerHTML =
+    "<h2>No barangay selected.</h2><p>Please go back and choose a district and barangay.</p>";
+} else {
 
-// MAP
-document.getElementById("mapFrame").src =
-  `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
+  fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("weather").innerText =
+      `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
+  });
+
+  document.getElementById("mapFrame").src =
+    `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
+}
 
 </script>
 
