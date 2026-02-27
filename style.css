@@ -152,3 +152,38 @@ p[style*="color"] {
   font-size: 13px;
   color: #666;
 }
+
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f4f4;
+  margin:0;
+}
+
+header{
+  background:#7a1f2b;
+  color:white;
+  padding:15px;
+}
+
+main{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+button{
+  background:#7a1f2b;
+  color:white;
+  padding:12px 20px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}

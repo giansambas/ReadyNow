@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Quezon City Evacuation Map</title>
+<title>Evacuation Map – ReadyNow</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,202 +11,49 @@
   <h2 onclick="window.location.href='index.html'" style="cursor:pointer;">
     ReadyNow
   </h2>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-  </nav>
 </header>
 
 <main>
+<h1>Evacuation Map</h1>
 
-<h1>Quezon City Evacuation Centers</h1>
-
-<!-- WEATHER -->
-<div class="section feature-box">
+<div class="card">
   <h3>Current Weather – Quezon City</h3>
-  <p id="weather">Loading weather...</p>
+  <p id="weather">Loading...</p>
 </div>
 
-<!-- DISTRICT SELECT -->
-<div class="section feature-box">
-  <h3>Select District</h3>
-  <select id="districtSelect">
-    <option value="">Choose District</option>
-    <option value="District 2">District 2</option>
-    <option value="District 3">District 3</option>
-    <option value="District 4">District 4</option>
-    <option value="District 5">District 5</option>
-    <option value="District 6">District 6</option>
-  </select>
+<div class="card">
+  <iframe
+    id="mapFrame"
+    width="100%"
+    height="400"
+    style="border:0"
+    loading="lazy">
+  </iframe>
 </div>
 
-<!-- BARANGAY SELECT -->
-<div class="section feature-box">
-  <h3>Select Barangay</h3>
-  <select id="barangaySelect">
-    <option value="">Choose Barangay</option>
-  </select>
-</div>
-
-<!-- SEARCH BAR -->
-<div class="section feature-box">
-  <h3>Search Barangay (if unsure)</h3>
-  <input type="text" id="searchInput" placeholder="Type barangay name...">
-</div>
-
-<!-- FACILITIES -->
-<div class="section feature-box">
+<div class="card">
   <h3>Evacuation Facilities</h3>
   <ul id="facilityList"></ul>
 </div>
 
 </main>
 
-<footer>
-  <p>ReadyNow © 2026</p>
-</footer>
-
 <script>
 
-// WEATHER FIXED
+const params = new URLSearchParams(window.location.search);
+const barangay = params.get("barangay");
+
+// WEATHER
 fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
 .then(res => res.json())
 .then(data => {
   document.getElementById("weather").innerText =
     `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
-})
-.catch(() => {
-  document.getElementById("weather").innerText =
-    "Unable to load weather data.";
 });
 
-// ===========================
-// FULL EVACUATION DATA
-// ===========================
-
-const evacuationData = {
-
-// ---------------- DISTRICT 6 ----------------
-"District 6": {
-  "Apolonio Samson": ["Apolonio Samson Elementary School"],
-  "Baesa": [
-    "Covered Court Asamba",
-    "Monotoc Covered Court",
-    "Elementary School",
-    "Saint Martin De Porres Chapel",
-    "Dead End Court"
-  ],
-  "Balong-Bato": [
-    "Balon-Bato Health Center",
-    "Balon-Bato Elementary School"
-  ],
-  "Culiat": [
-    "Vargas Compound Covered Court",
-    "Multipurpose Hall",
-    "Dunong Kabuhayan Training Center",
-    "Culiat High School",
-    "Salam Covered Court",
-    "Bernardo Covered Court Multi-Purpose Hall",
-    "Pael Multipurpose Hall"
-  ],
-  "New Era": ["Disaster Building", "MRF Building"],
-  "Pasong Tamo": [
-    "Marcel Village Covered Court",
-    "Veteran ANNEX I",
-    "Pingkian / Central ANNEX II",
-    "Pantranco Chapel"
-  ],
-  "Sangandaan": [
-    "Mendoza Multipurpose Building – 3rd Floor",
-    "Mathay High School"
-  ],
-  "Sauyo": [
-    "Sotto Multipurpose Building",
-    "Sauyo Elementary School",
-    "Del Nacia Ville Covered Court",
-    "NIA Covered Court",
-    "Sauyo Covered Court"
-  ],
-  "Talipapa": [
-    "Talipapa Barangay Hall – 3rd Floor",
-    "Placido del Mundo Elementary School",
-    "Villa Sabina Park",
-    "Volleyball Court",
-    "Silvina Village Sports Complex",
-    "Sahara Sports Complex Basketball Court"
-  ],
-  "Tandang Sora": [
-    "Tandang Sora Barangay Hall",
-    "Tandang Sora Covered Court"
-  ],
-  "Unang Sigaw": [
-    "Covered Court (Camachile Police Station 3 QCPD)"
-  ],
-  "UP Campus": [
-    "Amorsolo Building",
-    "Village B Covered Court",
-    "Dagohoy Hall"
-  ],
-  "UP Village": [
-    "Basketball Court",
-    "Tennis Court"
-  ]
-}
-
-};
-
-// ===========================
-// DISTRICT + BARANGAY LOGIC
-// ===========================
-
-const districtSelect = document.getElementById("districtSelect");
-const barangaySelect = document.getElementById("barangaySelect");
-const facilityList = document.getElementById("facilityList");
-const searchInput = document.getElementById("searchInput");
-
-districtSelect.addEventListener("change", () => {
-  barangaySelect.innerHTML = '<option value="">Choose Barangay</option>';
-  facilityList.innerHTML = "";
-
-  const selectedDistrict = districtSelect.value;
-  if (!selectedDistrict) return;
-
-  const barangays = Object.keys(evacuationData[selectedDistrict]).sort();
-  barangays.forEach(brgy => {
-    const option = document.createElement("option");
-    option.value = brgy;
-    option.textContent = brgy;
-    barangaySelect.appendChild(option);
-  });
-});
-
-barangaySelect.addEventListener("change", () => {
-  displayFacilities(districtSelect.value, barangaySelect.value);
-});
-
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  const district = districtSelect.value;
-  if (!district) return;
-
-  const barangays = Object.keys(evacuationData[district]);
-  const found = barangays.find(b => b.toLowerCase().includes(query));
-  if (found) {
-    barangaySelect.value = found;
-    displayFacilities(district, found);
-  }
-});
-
-function displayFacilities(district, barangay) {
-  facilityList.innerHTML = "";
-  if (!district || !barangay) return;
-
-  evacuationData[district][barangay].forEach(place => {
-    const li = document.createElement("li");
-    li.textContent = place;
-    facilityList.appendChild(li);
-  });
-}
+// MAP
+document.getElementById("mapFrame").src =
+  `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
 
 </script>
 
