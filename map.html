@@ -17,8 +17,10 @@
 <h1>Evacuation Map</h1>
 
 <div class="card">
-  <h3>Current Weather – Quezon City</h3>
-  <p id="weather">Loading...</p>
+  <h2>Current Weather – Quezon City</h2>
+  <div id="weatherVisual">
+    <p id="weather">Loading...</p>
+  </div>
 </div>
 
 <div class="card">
@@ -766,27 +768,30 @@ if (!barangay) {
   document.getElementById("mapFrame").src =
     `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
 
-  // =============================
-  // DISPLAY FACILITIES (FIXED MATCHING)
-  // =============================
-  const cleanBarangay = barangay.trim().toLowerCase();
+  // =====================
+// DISPLAY FACILITIES (ANIMATED)
+// =====================
 
-  const matchedKey = Object.keys(evacuationData).find(
-    key => key.toLowerCase() === cleanBarangay
-  );
+const cleanBarangay = barangay.trim().toLowerCase();
 
-  const list = document.getElementById("facilityList");
+const matchedKey = Object.keys(evacuationData).find(
+  key => key.toLowerCase() === cleanBarangay
+);
 
-  if (matchedKey) {
-    evacuationData[matchedKey].forEach(place => {
-      const li = document.createElement("li");
-      li.textContent = place;
-      list.appendChild(li);
-    });
-  } else {
-    list.innerHTML =
-      "<li>No evacuation centers listed yet for this barangay.</li>";
-  }
+const list = document.getElementById("facilityList");
+list.innerHTML = "";
+
+if (matchedKey) {
+  evacuationData[matchedKey].forEach((place, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = "🏫 " + place;
+    li.style.animationDelay = `${index * 0.1}s`;
+    list.appendChild(li);
+  });
+} else {
+  list.innerHTML =
+    "<li>No evacuation centers listed yet for this barangay.</li>";
+}
 
 }
 

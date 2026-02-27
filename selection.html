@@ -17,6 +17,8 @@
 <h1>Select Your Location</h1>
 
 <div class="card">
+  <h2>Select Your Location</h2>
+
   <label>District</label>
   <select id="districtSelect">
     <option value="">Choose District</option>
@@ -27,29 +29,22 @@
     <option>District 5</option>
     <option>District 6</option>
   </select>
-</div>
 
-<div class="card">
   <label>Barangay</label>
   <select id="barangaySelect">
     <option value="">Choose Barangay</option>
   </select>
-</div>
 
-<div class="card">
   <label>Search Barangay (if unsure)</label>
-  <input type="text" id="searchInput" placeholder="Type barangay name...">
-</div>
+  <input type="text" id="searchInput" placeholder="Type barangay name..." />
 
-<button onclick="goToMap()">View Evacuation Map</button>
+  <br><br>
+  <button onclick="goToMap()">View Evacuation Map</button>
+</div>
 
 </main>
 
 <script>
-
-// =====================
-// DISTRICT 1–6 BARANGAY LISTS
-// =====================
 
 const barangayData = {
 
@@ -67,7 +62,6 @@ const barangayData = {
 
 };
 
-// Populate Barangay
 document.getElementById("districtSelect").addEventListener("change", function() {
   const district = this.value;
   const select = document.getElementById("barangaySelect");
@@ -82,7 +76,6 @@ document.getElementById("districtSelect").addEventListener("change", function() 
   });
 });
 
-// Search Function
 document.getElementById("searchInput").addEventListener("input", function(){
   const query = this.value.toLowerCase();
   const district = document.getElementById("districtSelect").value;
