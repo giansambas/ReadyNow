@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Evacuation Map</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Quezon City Evacuation Map</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <h2><a href="index.html" class="logo-link">ReadyNow</a></h2>
+  <h2 onclick="window.location.href='index.html'" style="cursor:pointer;">
+    ReadyNow
+  </h2>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -16,32 +18,48 @@
 </header>
 
 <main>
-  <h1>Evacuation Centers – Quezon City</h1>
 
-  <div class="section feature-box">
-    <iframe
-      width="100%"
-      height="350"
-      style="border:0;"
-      loading="lazy"
-      src="https://www.google.com/maps?q=Quezon City evacuation centers&output=embed">
-    </iframe>
-  </div>
+<h1>Quezon City Evacuation Centers</h1>
 
-  <div class="section feature-box">
-    <h3>Official Evacuation Centers (District 1)</h3>
-    <ul id="evacuation-list"></ul>
-  </div>
+<!-- WEATHER -->
+<div class="section feature-box">
+  <h3>Current Weather – Quezon City</h3>
+  <p id="weather">Loading weather...</p>
+</div>
 
-  <div class="section feature-box">
-    <h3>Emergency Contacts – QC DRRMO</h3>
-    <ul>
-      <li>Helpline 122</li>
-      <li>8988-4242 local 8038</li>
-      <li>0947-885-9929</li>
-      <li>0947-884-7498</li>
-    </ul>
-  </div>
+<!-- DISTRICT SELECT -->
+<div class="section feature-box">
+  <h3>Select District</h3>
+  <select id="districtSelect">
+    <option value="">Choose District</option>
+    <option value="District 2">District 2</option>
+    <option value="District 3">District 3</option>
+    <option value="District 4">District 4</option>
+    <option value="District 5">District 5</option>
+    <option value="District 6">District 6</option>
+  </select>
+</div>
+
+<!-- BARANGAY SELECT -->
+<div class="section feature-box">
+  <h3>Select Barangay</h3>
+  <select id="barangaySelect">
+    <option value="">Choose Barangay</option>
+  </select>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="section feature-box">
+  <h3>Search Barangay (if unsure)</h3>
+  <input type="text" id="searchInput" placeholder="Type barangay name...">
+</div>
+
+<!-- FACILITIES -->
+<div class="section feature-box">
+  <h3>Evacuation Facilities</h3>
+  <ul id="facilityList"></ul>
+</div>
+
 </main>
 
 <footer>
@@ -49,26 +67,147 @@
 </footer>
 
 <script>
-  const evacuationData = [
-    { barangay: "Alicia", facility: "Brgy Alicia Hall – 3rd Floor" },
-    { barangay: "Bagong Pag-asa", facility: "Multipurpose Covered Court" },
-    { barangay: "Bahay Toro", facility: "Toro Hills Elementary School" },
-    { barangay: "Balingasa", facility: "Barangay Hall Covered Court" },
-    { barangay: "Bungad", facility: "Barangay Bungad Covered Court" },
-    { barangay: "Damar", facility: "Multi-Purpose Hall" },
-    { barangay: "Del Monte", facility: "San Francisco Elementary School" },
-    { barangay: "Project 6", facility: "Project 6 Elementary School" },
-    { barangay: "San Antonio", facility: "San Antonio De Padua Parish Church" },
-    { barangay: "San Jose", facility: "San Jose Elementary School" }
-  ];
 
-  const list = document.getElementById("evacuation-list");
+// WEATHER FIXED
+fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
+.then(res => res.json())
+.then(data => {
+  document.getElementById("weather").innerText =
+    `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
+})
+.catch(() => {
+  document.getElementById("weather").innerText =
+    "Unable to load weather data.";
+});
 
-  evacuationData.forEach(center => {
-    const li = document.createElement("li");
-    li.innerText = `${center.barangay} – ${center.facility}`;
-    list.appendChild(li);
+// ===========================
+// FULL EVACUATION DATA
+// ===========================
+
+const evacuationData = {
+
+// ---------------- DISTRICT 6 ----------------
+"District 6": {
+  "Apolonio Samson": ["Apolonio Samson Elementary School"],
+  "Baesa": [
+    "Covered Court Asamba",
+    "Monotoc Covered Court",
+    "Elementary School",
+    "Saint Martin De Porres Chapel",
+    "Dead End Court"
+  ],
+  "Balong-Bato": [
+    "Balon-Bato Health Center",
+    "Balon-Bato Elementary School"
+  ],
+  "Culiat": [
+    "Vargas Compound Covered Court",
+    "Multipurpose Hall",
+    "Dunong Kabuhayan Training Center",
+    "Culiat High School",
+    "Salam Covered Court",
+    "Bernardo Covered Court Multi-Purpose Hall",
+    "Pael Multipurpose Hall"
+  ],
+  "New Era": ["Disaster Building", "MRF Building"],
+  "Pasong Tamo": [
+    "Marcel Village Covered Court",
+    "Veteran ANNEX I",
+    "Pingkian / Central ANNEX II",
+    "Pantranco Chapel"
+  ],
+  "Sangandaan": [
+    "Mendoza Multipurpose Building – 3rd Floor",
+    "Mathay High School"
+  ],
+  "Sauyo": [
+    "Sotto Multipurpose Building",
+    "Sauyo Elementary School",
+    "Del Nacia Ville Covered Court",
+    "NIA Covered Court",
+    "Sauyo Covered Court"
+  ],
+  "Talipapa": [
+    "Talipapa Barangay Hall – 3rd Floor",
+    "Placido del Mundo Elementary School",
+    "Villa Sabina Park",
+    "Volleyball Court",
+    "Silvina Village Sports Complex",
+    "Sahara Sports Complex Basketball Court"
+  ],
+  "Tandang Sora": [
+    "Tandang Sora Barangay Hall",
+    "Tandang Sora Covered Court"
+  ],
+  "Unang Sigaw": [
+    "Covered Court (Camachile Police Station 3 QCPD)"
+  ],
+  "UP Campus": [
+    "Amorsolo Building",
+    "Village B Covered Court",
+    "Dagohoy Hall"
+  ],
+  "UP Village": [
+    "Basketball Court",
+    "Tennis Court"
+  ]
+}
+
+};
+
+// ===========================
+// DISTRICT + BARANGAY LOGIC
+// ===========================
+
+const districtSelect = document.getElementById("districtSelect");
+const barangaySelect = document.getElementById("barangaySelect");
+const facilityList = document.getElementById("facilityList");
+const searchInput = document.getElementById("searchInput");
+
+districtSelect.addEventListener("change", () => {
+  barangaySelect.innerHTML = '<option value="">Choose Barangay</option>';
+  facilityList.innerHTML = "";
+
+  const selectedDistrict = districtSelect.value;
+  if (!selectedDistrict) return;
+
+  const barangays = Object.keys(evacuationData[selectedDistrict]).sort();
+  barangays.forEach(brgy => {
+    const option = document.createElement("option");
+    option.value = brgy;
+    option.textContent = brgy;
+    barangaySelect.appendChild(option);
   });
+});
+
+barangaySelect.addEventListener("change", () => {
+  displayFacilities(districtSelect.value, barangaySelect.value);
+});
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  const district = districtSelect.value;
+  if (!district) return;
+
+  const barangays = Object.keys(evacuationData[district]);
+  const found = barangays.find(b => b.toLowerCase().includes(query));
+  if (found) {
+    barangaySelect.value = found;
+    displayFacilities(district, found);
+  }
+});
+
+function displayFacilities(district, barangay) {
+  facilityList.innerHTML = "";
+  if (!district || !barangay) return;
+
+  evacuationData[district][barangay].forEach(place => {
+    const li = document.createElement("li");
+    li.textContent = place;
+    facilityList.appendChild(li);
+  });
+}
+
 </script>
 
 </body>
