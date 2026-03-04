@@ -11,9 +11,12 @@
 
 <body>
 
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
 
-<div class="sidebar-logo">ReadyNow</div>
+<div class="sidebar-header">
+<span class="sidebar-logo">ReadyNow</span>
+<button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+</div>
 
 <ul class="sidebar-menu">
 <li><a href="dashboard.html">Dashboard</a></li>
@@ -23,7 +26,6 @@
 </ul>
 
 </div>
-
 
 <header class="main-header">
 
@@ -38,46 +40,60 @@
 
 </header>
 
-
 <main class="page-container">
 
 <section class="hero">
 <h1>Dashboard</h1>
-<p>Latest disaster related news and alerts</p>
+<p>Latest disaster-related news</p>
 </section>
-
 
 <div class="card">
 
 <h3>Latest Disaster News</h3>
 
 <ul id="newsList">
-<li>Loading news...</li>
+<li>Loading latest news...</li>
 </ul>
 
 </div>
 
 </main>
 
-
 <footer>
 <p>ReadyNow © 2026</p>
 </footer>
 
-
 <script>
 
 function toggleSidebar(){
-document.querySelector(".sidebar").classList.toggle("open");
+document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* DISASTER NEWS */
+/* Close sidebar if clicking outside */
+
+document.addEventListener("click", function(e){
+
+const sidebar = document.getElementById("sidebar");
+const menuBtn = document.querySelector(".menu-toggle");
+
+if(
+sidebar.classList.contains("open") &&
+!sidebar.contains(e.target) &&
+!menuBtn.contains(e.target)
+){
+sidebar.classList.remove("open");
+}
+
+});
+
+/* Disaster News */
 
 fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en")
 .then(res => res.json())
 .then(data => {
 
 const list = document.getElementById("newsList");
+
 list.innerHTML="";
 
 data.items.slice(0,5).forEach(news=>{
