@@ -2,20 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard - ReadyNow</title>
+<title>Dashboard - ReadyNow">
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="sidebar">
 
 <div class="sidebar-logo">ReadyNow</div>
 
+<div class="sidebar-section">MAIN</div>
+
 <ul class="sidebar-menu">
 <li><a href="dashboard.html">Dashboard</a></li>
 <li><a href="selection.html">Select Location</a></li>
+</ul>
+
+<div class="sidebar-section">INFORMATION</div>
+
+<ul class="sidebar-menu">
 <li><a href="map.html">Evacuation Information</a></li>
+<li><a href="map.html#weather">Weather Information</a></li>
+<li><a href="map.html#facilities">Evacuation Facilities</a></li>
+</ul>
+
+<div class="sidebar-section">SYSTEM</div>
+
+<ul class="sidebar-menu">
 <li><a href="about.html">About ReadyNow</a></li>
 </ul>
 
@@ -33,37 +46,49 @@
 
 <main class="page-container">
 
+<section class="hero">
 <h1>Dashboard</h1>
+<p>Your disaster readiness overview</p>
+</section>
 
-<div class="feature-grid">
+<div class="dashboard-grid">
 
-<div class="feature-card">
-<h3>Current Weather</h3>
-<p id="dashboardWeather">Loading weather...</p>
-</div>
-
-<div class="feature-card">
+<div class="card">
 <h3>Selected Location</h3>
 <p id="dashboardLocation">No location selected</p>
 </div>
 
-<div class="feature-card">
-<h3>Nearest Evacuation Centers</h3>
-<p>Open courts and multipurpose halls near your barangay.</p>
+<div class="card">
+<h3>Current Weather</h3>
+<p id="dashboardWeather">Loading weather...</p>
 </div>
 
-<div class="feature-card">
-<h3>Emergency Tips</h3>
-<p>Prepare emergency kits and follow LGU advisories.</p>
+</div>
+
+<div class="dashboard-row">
+
+<div class="card">
+<h3>Nearest Evacuation Centers</h3>
+<ul>
+<li>Open Court</li>
+<li>Multipurpose Hall</li>
+<li>Elementary School Covered Court</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Emergency Preparedness Tips</h3>
+<ul>
+<li>Prepare emergency kits</li>
+<li>Know evacuation routes</li>
+<li>Charge mobile devices before storms</li>
+<li>Follow LGU advisories</li>
+</ul>
 </div>
 
 </div>
 
 </main>
-
-<footer>
-<p>ReadyNow © 2026</p>
-</footer>
 
 </div>
 

@@ -14,20 +14,25 @@
 ReadyNow
 </div>
 
+<div class="sidebar-section">MAIN</div>
+
 <ul class="sidebar-menu">
-
 <li><a href="dashboard.html">Dashboard</a></li>
-
 <li><a href="selection.html">Select Location</a></li>
+</ul>
 
+<div class="sidebar-section">INFORMATION</div>
+
+<ul class="sidebar-menu">
 <li><a href="map.html">Evacuation Information</a></li>
-
 <li><a href="map.html#weather">Weather Information</a></li>
-
 <li><a href="map.html#facilities">Evacuation Facilities</a></li>
+</ul>
 
+<div class="sidebar-section">SYSTEM</div>
+
+<ul class="sidebar-menu">
 <li><a href="about.html">About ReadyNow</a></li>
-
 </ul>
 
 </div>
@@ -45,48 +50,39 @@ ReadyNow
 <main class="page-container">
 
 <section class="hero">
-
 <h1>Evacuation Information</h1>
-
 <p>Stay informed. Stay prepared. Stay safe.</p>
-
 </section>
 
 <section class="info-grid">
 
-<div class="card">
-
+<div class="card" id="weather">
 <h3>Current Weather</h3>
-
-<p id="weather">Loading weather...</p>
-
+<p id="weatherText">Loading weather...</p>
 </div>
 
 <div class="card">
-
 <h3>Selected Location</h3>
-
 <p><strong>District:</strong> <span id="selectedDistrict"></span></p>
-
 <p><strong>Barangay:</strong> <span id="selectedBarangay"></span></p>
-
 </div>
 
 </section>
 
+<div class="map-layout">
+
 <div class="card map-container">
-
 <h3>Evacuation Map</h3>
-
 <iframe id="mapFrame"></iframe>
-
 </div>
 
-<div class="card" id="facilities">
+<div class="facility-panel card" id="facilities">
 
 <h3>Evacuation Facilities</h3>
 
-<div id="facilityList" class="facility-grid"></div>
+<div id="facilityList"></div>
+
+</div>
 
 </div>
 
@@ -94,12 +90,12 @@ ReadyNow
 
 <h3>Emergency Preparedness Tips</h3>
 
-<div class="feature-grid">
+<div class="tips-grid">
 
-<div class="feature-card">Prepare emergency kits</div>
-<div class="feature-card">Know evacuation routes</div>
-<div class="feature-card">Charge mobile devices before storms</div>
-<div class="feature-card">Follow official LGU advisories</div>
+<div class="tip-card">Prepare emergency kits</div>
+<div class="tip-card">Know evacuation routes</div>
+<div class="tip-card">Charge mobile devices before storms</div>
+<div class="tip-card">Follow official LGU advisories</div>
 
 </div>
 
@@ -812,51 +808,34 @@ const evacuationData = {
 
 };
 
-
-if (!barangay) {
-document.querySelector("main").innerHTML =
-"<h2>No barangay selected.</h2><p>Please go back and choose a district and barangay.</p>";
-} else {
-
 fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
 .then(res => res.json())
 .then(data => {
-if (data.main) {
 
-document.getElementById("weather").innerHTML =
+if(data.main){
+
+document.getElementById("weatherText").innerHTML =
 `Temperature: ${data.main.temp}°C<br>
 Condition: ${data.weather[0].description}<br>
 Humidity: ${data.main.humidity}%<br>
 Wind Speed: ${data.wind.speed} m/s`;
 
-} else {
-document.getElementById("weather").innerText =
-"Weather data unavailable.";
 }
-})
-.catch(() => {
-document.getElementById("weather").innerText =
-"Unable to load weather data.";
+
 });
 
 document.getElementById("mapFrame").src =
 `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
 
-const cleanBarangay = barangay.trim().toLowerCase();
-
-const matchedKey = Object.keys(evacuationData).find(
-key => key.toLowerCase() === cleanBarangay
-);
-
 const list = document.getElementById("facilityList");
-list.innerHTML = "";
 
-if (matchedKey) {
+if(evacuationData[barangay]){
 
-evacuationData[matchedKey].forEach(place => {
+evacuationData[barangay].forEach(place=>{
 
 const card = document.createElement("div");
-card.className = "facility-card";
+
+card.className="facility-card";
 
 card.innerHTML = `
 <h4>${place}</h4>
@@ -867,13 +846,6 @@ card.innerHTML = `
 list.appendChild(card);
 
 });
-
-} else {
-
-list.innerHTML =
-"<p>No evacuation centers listed yet for this barangay.</p>";
-
-}
 
 }
 
