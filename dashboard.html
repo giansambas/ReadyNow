@@ -2,37 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - ReadyNow</title>
+<meta charset="UTF-8">
+<title>Dashboard - ReadyNow</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+
 <!-- SIDEBAR -->
 
 <div class="sidebar" id="sidebar">
 
-    <div class="sidebar-header">
-        <span class="sidebar-logo">ReadyNow</span>
-        <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
-    </div>
+<div class="sidebar-header">
+<span class="sidebar-logo">ReadyNow</span>
+<button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+</div>
 
-    <ul class="sidebar-menu">
+<ul class="sidebar-menu">
 
-        <li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
 
-        <li><a href="selection.html">Select Location</a></li>
+<li><a href="selection.html">Select Location</a></li>
 
-        <li><a href="map.html">Evacuation Information</a></li>
+<li><a href="map.html">Evacuation Information</a></li>
 
-        <li><a href="about.html">About ReadyNow</a></li>
+<li><a href="about.html">About ReadyNow</a></li>
 
-    </ul>
+</ul>
 
 </div>
 
@@ -41,17 +42,17 @@
 
 <header class="main-header">
 
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-    <div class="logo">ReadyNow</div>
+<div class="logo">ReadyNow</div>
 
-    <nav>
+<nav>
 
-        <a href="index.html">Home</a>
+<a href="index.html">Home</a>
 
-        <a href="about.html">About</a>
+<a href="about.html">About</a>
 
-    </nav>
+</nav>
 
 </header>
 
@@ -59,6 +60,7 @@
 <!-- MAIN CONTENT -->
 
 <main class="page-container">
+
 
 <section class="hero">
 
@@ -69,19 +71,20 @@
 </section>
 
 
-<!-- NEWS CARD -->
+<!-- NEWS SECTION -->
 
 <div class="card">
 
 <h3>Latest Disaster News</h3>
 
-<ul id="newsList">
+<div id="newsList" class="news-grid">
 
-<li>Loading latest disaster news...</li>
-
-</ul>
+Loading latest disaster news...
 
 </div>
+
+</div>
+
 
 </main>
 
@@ -91,6 +94,7 @@
 <p>ReadyNow © 2026</p>
 
 </footer>
+
 
 
 <script>
@@ -150,32 +154,73 @@ const newsList = document.getElementById("newsList");
 
 newsList.innerHTML = "";
 
+
 items.forEach((item, index) => {
 
-if(index >= 5) return;
+if(index >= 6) return;
+
 
 const title = item.querySelector("title").textContent;
 
 const link = item.querySelector("link").textContent;
 
-const li = document.createElement("li");
+const description = item.querySelector("description").textContent;
 
-li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
 
-newsList.appendChild(li);
+/* Extract image */
+
+let image = "";
+
+const imgMatch = description.match(/<img.*?src="(.*?)"/);
+
+if(imgMatch){
+
+image = imgMatch[1];
+
+}
+
+
+/* Create card */
+
+const card = document.createElement("div");
+
+card.className = "news-card";
+
+card.innerHTML = `
+
+<a href="${link}" target="_blank">
+
+<img src="${image}" alt="news image">
+
+<div class="news-content">
+
+<h4>${title}</h4>
+
+<p>Click to read full article</p>
+
+</div>
+
+</a>
+
+`;
+
+
+newsList.appendChild(card);
 
 });
 
 })
 
-.catch(() => {
+.catch(()=>{
 
-document.getElementById("newsList").innerHTML = "<li>Unable to load disaster news.</li>";
+document.getElementById("newsList").innerHTML =
+"Unable to load disaster news.";
 
 });
 
 
 </script>
+
 
 </body>
 </html>
