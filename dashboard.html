@@ -1,114 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Dashboard - ReadyNow</title>
+    <meta charset="UTF-8">
+    <title>Dashboard - ReadyNow</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="sidebar" id="sidebar">
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
 
-<div class="sidebar-header">
-<span class="sidebar-logo">ReadyNow</span>
-<button class="close-sidebar" onclick="toggleSidebar()">✕</button>
-</div>
+        <div class="sidebar-header">
+            <span class="sidebar-logo">ReadyNow</span>
+            <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
+        </div>
 
-<ul class="sidebar-menu">
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="selection.html">Select Location</a></li>
-<li><a href="map.html">Evacuation Information</a></li>
-<li><a href="about.html">About ReadyNow</a></li>
-</ul>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="selection.html">Select Location</a></li>
+            <li><a href="map.html">Evacuation Information</a></li>
+            <li><a href="about.html">About ReadyNow</a></li>
+        </ul>
 
-</div>
+    </div>
 
-<header class="main-header">
 
-<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <!-- HEADER -->
+    <header class="main-header">
 
-<div class="logo">ReadyNow</div>
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-</nav>
+        <div class="logo">ReadyNow</div>
 
-</header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        </nav>
 
-<main class="page-container">
+    </header>
 
-<section class="hero">
-<h1>Dashboard</h1>
-<p>Latest disaster-related news</p>
-</section>
 
-<div class="card">
+    <!-- MAIN CONTENT -->
+    <main class="page-container">
 
-<h3>Latest Disaster News</h3>
+        <section class="hero">
+            <h1>Dashboard</h1>
+            <p>Latest disaster-related news and updates</p>
+        </section>
 
-<ul id="newsList">
-<li>Loading latest news...</li>
-</ul>
 
-</div>
+        <!-- NEWS SECTION -->
+        <div class="card">
 
-</main>
+            <h3>Latest Disaster News</h3>
 
-<footer>
-<p>ReadyNow © 2026</p>
-</footer>
+            <ul id="newsList">
+                <li>Loading latest disaster news...</li>
+            </ul>
 
-<script>
+        </div>
 
-function toggleSidebar(){
-document.getElementById("sidebar").classList.toggle("open");
-}
+    </main>
 
-/* Close sidebar if clicking outside */
 
-document.addEventListener("click", function(e){
+    <footer>
+        <p>ReadyNow © 2026</p>
+    </footer>
 
-const sidebar = document.getElementById("sidebar");
-const menuBtn = document.querySelector(".menu-toggle");
 
-if(
-sidebar.classList.contains("open") &&
-!sidebar.contains(e.target) &&
-!menuBtn.contains(e.target)
-){
-sidebar.classList.remove("open");
-}
+    <script>
 
-});
+        /* Sidebar toggle */
 
-/* Disaster News */
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("open");
+        }
 
-fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en")
-.then(res => res.json())
-.then(data => {
 
-const list = document.getElementById("newsList");
+        /* Close sidebar when clicking outside */
 
-list.innerHTML="";
+        document.addEventListener("click", function (e) {
 
-data.items.slice(0,5).forEach(news=>{
+            const sidebar = document.getElementById("sidebar");
+            const menuBtn = document.querySelector(".menu-toggle");
 
-const li=document.createElement("li");
+            if (
+                sidebar.classList.contains("open") &&
+                !sidebar.contains(e.target) &&
+                !menuBtn.contains(e.target)
+            ) {
+                sidebar.classList.remove("open");
+            }
 
-li.innerHTML=`<a href="${news.link}" target="_blank">${news.title}</a>`;
+        });
 
-list.appendChild(li);
 
-});
+        /* Load disaster news */
 
-});
+        fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en")
 
-</script>
+            .then(response => response.json())
+
+            .then(data => {
+
+                const newsList = document.getElementById("newsList");
+
+                newsList.innerHTML = "";
+
+                data.items.slice(0, 5).forEach(article => {
+
+                    const li = document.createElement("li");
+
+                    li.innerHTML = `
+                        <a href="${article.link}" target="_blank">
+                            ${article.title}
+                        </a>
+                    `;
+
+                    newsList.appendChild(li);
+
+                });
+
+            })
+
+            .catch(() => {
+
+                document.getElementById("newsList").innerHTML =
+                    "<li>Unable to load disaster news.</li>";
+
+            });
+
+    </script>
 
 </body>
+
 </html>
