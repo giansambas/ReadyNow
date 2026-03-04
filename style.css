@@ -22,13 +22,18 @@ h1,h2,h3 {
 .main-header{
   position:fixed;
   top:0;
+  left:0;
   width:100%;
   background:#7b1e2b;
   color:white;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 40px;
+
+  padding:15px 30px;
+  box-sizing:border-box;
+
   z-index:1000;
 }
 
@@ -42,7 +47,9 @@ nav a{
   text-decoration:none;
   margin-left:25px;
   font-weight:500;
-  transition:0.3s;
+  transition:0.3s; 
+  display:flex;
+  align-items:center;
 }
 
 nav a:hover{
@@ -218,4 +225,12 @@ grid-template-columns:1fr;
 font-size:32px;
 }
 
+}
+
+footer{
+  text-align:center;
+  padding:30px 0;
+  margin-top:60px;
+  border-top:1px solid #ddd;
+  color:#555;
 }
