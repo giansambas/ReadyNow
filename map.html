@@ -32,12 +32,14 @@ ReadyNow
 
 </div>
 
+<div class="main-content">
+
 <header class="main-header">
-  <div class="logo">ReadyNow</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-  </nav>
+<div class="logo">ReadyNow</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+</nav>
 </header>
 
 <main class="page-container">
@@ -80,25 +82,45 @@ ReadyNow
 
 </div>
 
-<div class="card">
+<div class="card" id="facilities">
 
 <h3>Evacuation Facilities</h3>
 
-<ul id="facilityList"></ul>
+<div id="facilityList" class="facility-grid"></div>
+
+</div>
+
+<div class="card">
+
+<h3>Emergency Preparedness Tips</h3>
+
+<div class="feature-grid">
+
+<div class="feature-card">Prepare emergency kits</div>
+<div class="feature-card">Know evacuation routes</div>
+<div class="feature-card">Charge mobile devices before storms</div>
+<div class="feature-card">Follow official LGU advisories</div>
+
+</div>
 
 </div>
 
 </main>
 
-<script>
+<footer>
+<p>ReadyNow © 2026</p>
+</footer>
 
+</div>
+
+<script>
 
 const params = new URLSearchParams(window.location.search);
 const barangay = params.get("barangay");
 const district = params.get("district");
+
 document.getElementById("selectedBarangay").innerText = barangay || "-";
 document.getElementById("selectedDistrict").innerText = district || "-";
-
 
 const evacuationData = {
 
@@ -792,59 +814,73 @@ const evacuationData = {
 
 
 if (!barangay) {
-  document.querySelector("main").innerHTML =
-    "<h2>No barangay selected.</h2><p>Please go back and choose a district and barangay.</p>";
+document.querySelector("main").innerHTML =
+"<h2>No barangay selected.</h2><p>Please go back and choose a district and barangay.</p>";
 } else {
 
-  // =============================
-  // WEATHER
-  // =============================
-  fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
-  .then(res => res.json())
-  .then(data => {
-    if (data.main) {
-      document.getElementById("weather").innerText =
-        `Temperature: ${data.main.temp}°C | Condition: ${data.weather[0].description}`;
-    } else {
-      document.getElementById("weather").innerText =
-        "Weather data unavailable.";
-    }
-  })
-  .catch(() => {
-    document.getElementById("weather").innerText =
-      "Unable to load weather data.";
-  });
+fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
+.then(res => res.json())
+.then(data => {
+if (data.main) {
 
-  // =============================
-  // MAP
-  // =============================
-  document.getElementById("mapFrame").src =
-    `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
+document.getElementById("weather").innerHTML =
+`Temperature: ${data.main.temp}°C<br>
+Condition: ${data.weather[0].description}<br>
+Humidity: ${data.main.humidity}%<br>
+Wind Speed: ${data.wind.speed} m/s`;
 
-  // =====================
-// DISPLAY FACILITIES (ANIMATED)
-// =====================
+} else {
+document.getElementById("weather").innerText =
+"Weather data unavailable.";
+}
+})
+.catch(() => {
+document.getElementById("weather").innerText =
+"Unable to load weather data.";
+});
+
+document.getElementById("mapFrame").src =
+`https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
 
 const cleanBarangay = barangay.trim().toLowerCase();
 
 const matchedKey = Object.keys(evacuationData).find(
-  key => key.toLowerCase() === cleanBarangay
+key => key.toLowerCase() === cleanBarangay
 );
 
 const list = document.getElementById("facilityList");
 list.innerHTML = "";
 
 if (matchedKey) {
-  evacuationData[matchedKey].forEach((place, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = "🏫 " + place;
-    li.style.animationDelay = `${index * 0.1}s`;
-    list.appendChild(li);
-  });
+
+evacuationData[matchedKey].forEach(place => {
+
+const card = document.createElement("div");
+card.className = "facility-card";
+
+card.innerHTML = `
+<h4>${place}</h4>
+<p>Evacuation Facility</p>
+<button onclick="focusMap('${place}')">View on Map</button>
+`;
+
+list.appendChild(card);
+
+});
+
 } else {
-  list.innerHTML =
-    "<li>No evacuation centers listed yet for this barangay.</li>";
+
+list.innerHTML =
+"<p>No evacuation centers listed yet for this barangay.</p>";
+
 }
+
+}
+
+function focusMap(place){
+
+document.getElementById("mapFrame").src =
+`https://www.google.com/maps?q=${encodeURIComponent(place + ", Quezon City")}&output=embed`;
 
 }
 
