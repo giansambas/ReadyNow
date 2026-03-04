@@ -1,409 +1,221 @@
-/* ========== BASE RESET ========== */
-* {
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* ===== GLOBAL ===== */
 
 body {
   margin: 0;
-  background-color: #f4f2f2;
-  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  background: #f4f6f9;
+  color: #222;
 }
 
-/* ========== HEADER ========== */
-header {
-  background-color: #6b1f2b; /* Burgundy */
-  padding: 16px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+h1,h2,h3 {
+  font-family: 'Poppins', sans-serif;
 }
 
-header h2 {
-  margin: 0;
-  font-size: 20px;
+.page-container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
 }
 
-header h2 a {
-  color: #fff;
-  text-decoration: none;
-}
+/* ===== NAVBAR ===== */
 
-header nav a {
-  margin-left: 16px;
-  text-decoration: none;
-  color: #f5dede;
-  font-size: 14px;
-}
-
-header nav a:hover {
-  text-decoration: underline;
-}
-
-/* ========== MAIN LAYOUT ========== */
-main {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-h1 {
-  margin-bottom: 20px;
-  color: #6b1f2b;
-}
-
-/* ========== INTRO (HOME) ========== */
-.intro {
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.intro h1 {
-  font-size: 32px;
-  margin-bottom: 16px;
-}
-
-.intro p {
-  max-width: 650px;
-  margin: 0 auto 28px auto;
-  line-height: 1.6;
-  font-size: 16px;
-}
-
-/* ========== CARDS / SECTIONS ========== */
-.section,
-.feature-box {
-  background-color: #ffffff;
-  padding: 18px 20px;
-  margin-bottom: 18px;
-  border-radius: 6px;
-  border-left: 6px solid #6b1f2b;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-/* ========== FORMS ========== */
-.form-group {
-  margin-bottom: 18px;
-}
-
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #aaa;
-  background-color: #fff;
-}
-
-/* ========== BUTTONS ========== */
-button {
-  background-color: #6b1f2b;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-button:hover {
-  background-color: #571923;
-}
-
-/* ========== LISTS ========== */
-ul {
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 8px;
-}
-
-/* ========== ABOUT PAGE CENTERING ========== */
-.about-content {
-  text-align: center;
-  line-height: 1.6;
-}
-
-.about-content ul {
-  list-style-position: inside;
-  padding-left: 0;
-}
-
-/* ========== FOOTER ========== */
-footer {
-  text-align: center;
-  font-size: 13px;
-  color: #555;
-  padding: 24px 0;
-  margin-top: 50px;
-  border-top: 1px solid #ccc;
-}
-
-/* ========== SMALL INFO TEXT ========== */
-small,
-p[style*="color"] {
-  font-size: 13px;
-  color: #666;
-}
-
-body{
-  font-family: Arial, sans-serif;
-  background:#f4f4f4;
-  margin:0;
-}
-
-header{
-  background:#7a1f2b;
+.main-header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#7b1e2b;
   color:white;
-  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  z-index:1000;
 }
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-weight:500;
+  transition:0.3s;
+}
+
+nav a:hover{
+  opacity:0.7;
+}
+
+/* prevent content under navbar */
 
 main{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
+  margin-top:90px;
 }
+
+/* ===== HERO ===== */
+
+.hero{
+  text-align:center;
+  padding:80px 20px;
+}
+
+.hero h1{
+  font-size:46px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:18px;
+  color:#555;
+}
+
+.hero button{
+  margin-top:20px;
+}
+
+/* ===== BUTTON ===== */
+
+button{
+  background:#a8323e;
+  color:white;
+  border:none;
+  padding:12px 24px;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+button:hover{
+  background:#7b1e2b;
+  transform:translateY(-2px);
+}
+
+/* ===== CARD ===== */
 
 .card{
   background:white;
+  border-radius:14px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  margin-bottom:25px;
+}
+
+/* ===== FEATURE GRID ===== */
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  margin-top:40px;
+}
+
+.feature-card{
+  background:white;
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  text-align:center;
+  transition:0.25s;
+}
+
+.feature-card:hover{
+  transform:translateY(-5px);
+}
+
+.feature-card h3{
+  margin-top:10px;
+}
+
+/* ===== FORM ===== */
+
+label{
+  font-weight:600;
+  display:block;
+  margin-top:10px;
+}
+
+select,input{
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-top:5px;
+}
+
+/* ===== INFO GRID ===== */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+/* ===== MAP ===== */
+
+.map-container iframe{
+  width:100%;
+  height:420px;
+  border:none;
+  border-radius:10px;
+}
+
+/* ===== FACILITIES ===== */
+
+#facilityList{
+  list-style:none;
+  padding:0;
+}
+
+#facilityList li{
+  background:#f4f6f9;
+  padding:12px;
+  margin-bottom:8px;
+  border-radius:6px;
+}
+
+/* ===== ABOUT SOURCE CARDS ===== */
+
+.source-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.source-card{
+  background:#f9fafc;
   padding:20px;
-  margin-bottom:20px;
-  border-radius:8px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  border-radius:10px;
 }
 
-button {
-  background: #a8323e;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+/* ===== DISCLAIMER ===== */
+
+.disclaimer{
+  border-left:6px solid #a8323e;
+  background:#fff3f4;
 }
 
-button:hover {
-  background: #7b1e2b;
-  transform: translateY(-2px);
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:900px){
+
+.feature-grid{
+grid-template-columns:1fr;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background: linear-gradient(135deg, #f4f6f9, #e9eef3);
-  color: #2c3e50;
+.info-grid{
+grid-template-columns:1fr;
 }
 
-/* HEADER */
-.header {
-  background: linear-gradient(90deg, #7b1e2b, #a8323e);
-  padding: 30px;
-  text-align: center;
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  animation: fadeDown 0.8s ease;
+.source-grid{
+grid-template-columns:1fr;
 }
 
-/* CARDS */
-.card {
-  background: white;
-  margin: 25px auto;
-  padding: 25px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 1100px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  animation: fadeUp 0.8s ease;
+.hero h1{
+font-size:32px;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-}
-
-/* SELECTS */
-select, input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-  transition: all 0.3s ease;
-}
-
-select:focus, input:focus {
-  outline: none;
-  border-color: #a8323e;
-  box-shadow: 0 0 6px rgba(168,50,62,0.3);
-}
-
-/* MAP */
-.map-container iframe {
-  width: 100%;
-  height: 450px;
-  border-radius: 15px;
-  border: none;
-  transition: all 0.4s ease;
-}
-
-.map-container iframe:hover {
-  transform: scale(1.01);
-}
-
-/* EVAC LIST */
-#evacList li {
-  padding: 10px;
-  margin: 8px 0;
-  background: #f8f9fb;
-  border-radius: 8px;
-  transition: 0.3s;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: listFade 0.5s forwards;
-}
-
-#evacList li:hover {
-  background: #a8323e;
-  color: white;
-  transform: translateX(5px);
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes listFade {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.page-container {
-  padding: 40px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* HERO */
-.hero {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.hero h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  color: #6c757d;
-  font-size: 18px;
-}
-
-/* GRID */
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  margin-bottom: 30px;
-}
-
-/* CARDS */
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
-  transition: 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* WEATHER CARD SPECIAL */
-.weather-card {
-  background: linear-gradient(135deg, #ffffff, #f4f6f9);
-}
-
-/* MAP */
-.map-container iframe {
-  width: 100%;
-  height: 450px;
-  border-radius: 12px;
-  border: none;
-}
-
-/* EVAC LIST */
-#facilityList {
-  padding-left: 0;
-  list-style: none;
-}
-
-#facilityList li {
-  padding: 14px;
-  margin-bottom: 10px;
-  background: #f8f9fb;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-#facilityList li:hover {
-  background: #a8323e;
-  color: white;
-  transform: translateX(5px);
-}
-
-.about-section p {
-  color: #555;
-  line-height: 1.7;
-  font-size: 16px;
-}
-
-.sources-section {
-  display: grid;
-  gap: 20px;
-}
-
-.source-item {
-  background: #f8f9fb;
-  padding: 20px;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-
-.source-item:hover {
-  background: #a8323e;
-  color: white;
-  transform: translateY(-3px);
-}
-
-.source-item h3 {
-  margin-bottom: 5px;
-}
-
-.disclaimer-section {
-  border-left: 5px solid #a8323e;
-  background: #fff8f8;
-}
-
-.card {
-  animation: fadeUp 0.8s ease;
 }
