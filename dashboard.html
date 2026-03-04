@@ -99,40 +99,44 @@
         });
 
 
-        /* Load disaster news */
+        fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en"))
 
-        fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en")
+.then(response => response.json())
 
-            .then(response => response.json())
+.then(data => {
 
-            .then(data => {
+const parser = new DOMParser();
+const xml = parser.parseFromString(data.contents, "text/xml");
 
-                const newsList = document.getElementById("newsList");
+const items = xml.querySelectorAll("item");
 
-                newsList.innerHTML = "";
+const newsList = document.getElementById("newsList");
 
-                data.items.slice(0, 5).forEach(article => {
+newsList.innerHTML = "";
 
-                    const li = document.createElement("li");
+items.forEach((item, index) => {
 
-                    li.innerHTML = `
-                        <a href="${article.link}" target="_blank">
-                            ${article.title}
-                        </a>
-                    `;
+if(index >= 5) return;
 
-                    newsList.appendChild(li);
+const title = item.querySelector("title").textContent;
+const link = item.querySelector("link").textContent;
 
-                });
+const li = document.createElement("li");
 
-            })
+li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
 
-            .catch(() => {
+newsList.appendChild(li);
 
-                document.getElementById("newsList").innerHTML =
-                    "<li>Unable to load disaster news.</li>";
+});
 
-            });
+})
+
+.catch(() => {
+
+document.getElementById("newsList").innerHTML =
+"<li>Unable to load disaster news.</li>";
+
+});
 
     </script>
 
