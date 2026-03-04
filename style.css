@@ -19,10 +19,12 @@ main{
 margin-top:90px;
 }
 
+/* HEADER */
+
 .main-header{
 position:fixed;
 top:0;
-left:230px;
+left:0; /* FIXED: remove forced sidebar offset */
 right:0;
 height:70px;
 background:#7b1e2b;
@@ -32,6 +34,12 @@ justify-content:space-between;
 padding:0 30px;
 color:white;
 z-index:10;
+}
+
+/* Only push header when sidebar exists */
+
+.main-content .main-header{
+left:230px;
 }
 
 .logo{
@@ -44,6 +52,8 @@ color:white;
 text-decoration:none;
 margin-left:20px;
 }
+
+/* SIDEBAR */
 
 .sidebar{
 position:fixed;
@@ -96,10 +106,14 @@ background:#a8323e;
 margin-left:230px;
 }
 
+/* HERO */
+
 .hero{
 text-align:center;
 padding:40px 0;
 }
+
+/* CARDS */
 
 .card{
 background:white;
@@ -109,12 +123,7 @@ box-shadow:0 5px 20px rgba(0,0,0,.05);
 margin-bottom:25px;
 }
 
-.info-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:25px;
-margin-bottom:30px;
-}
+/* DASHBOARD */
 
 .dashboard-grid{
 display:grid;
@@ -129,6 +138,22 @@ grid-template-columns:1fr 1fr;
 gap:25px;
 }
 
+.dashboard-grid .card,
+.dashboard-row .card{
+min-height:140px;
+}
+
+/* INFO GRID */
+
+.info-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+margin-bottom:30px;
+}
+
+/* MAP LAYOUT */
+
 .map-layout{
 display:grid;
 grid-template-columns:70% 30%;
@@ -142,6 +167,8 @@ height:520px;
 border:none;
 border-radius:10px;
 }
+
+/* FACILITY PANEL */
 
 .facility-panel{
 display:flex;
@@ -168,6 +195,8 @@ border-radius:6px;
 cursor:pointer;
 }
 
+/* TIPS */
+
 .tips-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -181,6 +210,8 @@ border-radius:10px;
 box-shadow:0 4px 15px rgba(0,0,0,.05);
 text-align:center;
 }
+
+/* FEATURES */
 
 .feature-grid{
 display:grid;
@@ -197,6 +228,8 @@ box-shadow:0 4px 15px rgba(0,0,0,.05);
 text-align:center;
 }
 
+/* DATA SOURCES */
+
 .source-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -209,6 +242,8 @@ background:#fafafa;
 padding:20px;
 border-radius:10px;
 }
+
+/* INPUTS */
 
 input,select{
 width:100%;
@@ -227,12 +262,16 @@ border-radius:8px;
 cursor:pointer;
 }
 
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:30px;
 margin-top:50px;
 color:#555;
 }
+
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
