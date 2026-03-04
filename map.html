@@ -17,33 +17,53 @@
 </header>
 
 <main class="page-container">
-  <section class="hero">
-    <h1>Evacuation Information</h1>
-    <p>Stay informed. Stay prepared. Stay safe.</p>
-  </section>
 
-  <section class="info-grid">
-    <div class="card weather-card">
-      <h2>Current Weather</h2>
-      <p id="weather">Loading...</p>
-    </div>
+<section class="hero">
 
-    <div class="card location-card">
-      <h2>Selected Location</h2>
-      <p><strong>Barangay:</strong> <span id="selectedBarangay"></span></p>
-      <p><strong>District:</strong> <span id="selectedDistrict"></span></p>
-    </div>
-  </section>
+<h1>Evacuation Information</h1>
 
-  <section class="card map-container">
-    <h2>Evacuation Map</h2>
-    <iframe id="mapFrame"></iframe>
-  </section>
+<p>Stay informed. Stay prepared. Stay safe.</p>
 
-  <section class="card">
-    <h2>Evacuation Facilities</h2>
-    <ul id="facilityList"></ul>
-  </section>
+</section>
+
+<section class="info-grid">
+
+<div class="card">
+
+<h3>Current Weather</h3>
+
+<p id="weather">Loading weather...</p>
+
+</div>
+
+<div class="card">
+
+<h3>Selected Location</h3>
+
+<p><strong>District:</strong> <span id="selectedDistrict"></span></p>
+
+<p><strong>Barangay:</strong> <span id="selectedBarangay"></span></p>
+
+</div>
+
+</section>
+
+<div class="card map-container">
+
+<h3>Evacuation Map</h3>
+
+<iframe id="mapFrame"></iframe>
+
+</div>
+
+<div class="card">
+
+<h3>Evacuation Facilities</h3>
+
+<ul id="facilityList"></ul>
+
+</div>
+
 </main>
 
 <script>

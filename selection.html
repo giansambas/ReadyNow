@@ -17,34 +17,46 @@
 </header>
 
 <main class="page-container">
-  <section class="hero">
-    <h1>Select Your Location</h1>
-    <p>Choose your district and barangay to view evacuation information.</p>
-  </section>
 
-  <section class="card">
-    <label>District</label>
-    <select id="districtSelect">
-      <option value="">Choose District</option>
-      <option>District 1</option>
-      <option>District 2</option>
-      <option>District 3</option>
-      <option>District 4</option>
-      <option>District 5</option>
-      <option>District 6</option>
-    </select>
+<section class="hero">
 
-    <label>Barangay</label>
-    <select id="barangaySelect">
-      <option value="">Choose Barangay</option>
-    </select>
+<h1>Select Your Location</h1>
 
-    <label>Search Barangay (if unsure)</label>
-    <input type="text" id="searchInput" placeholder="Type barangay name...">
+<p>
+Choose your district and barangay to view evacuation information.
+</p>
 
-    <br><br>
-    <button onclick="goToMap()">View Evacuation Map</button>
-  </section>
+</section>
+
+<div class="card">
+
+<label>District</label>
+<select id="districtSelect">
+<option value="">Choose District</option>
+<option>District 1</option>
+<option>District 2</option>
+<option>District 3</option>
+<option>District 4</option>
+<option>District 5</option>
+<option>District 6</option>
+</select>
+
+<label>Barangay</label>
+<select id="barangaySelect">
+<option value="">Choose Barangay</option>
+</select>
+
+<label>Search Barangay (if unsure)</label>
+<input type="text" id="searchInput" placeholder="Type barangay name...">
+
+<br><br>
+
+<button onclick="goToMap()">
+View Evacuation Map
+</button>
+
+</div>
+
 </main>
 
 <script>
