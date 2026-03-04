@@ -38,67 +38,161 @@
 
 </div>
 
+
 <div class="main-content">
 
 <header class="main-header">
 <div class="logo">ReadyNow</div>
+
 <nav>
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 </nav>
+
 </header>
+
 
 <main class="page-container">
 
 <section class="hero">
+
 <h1>Dashboard</h1>
 <p>Your disaster readiness overview</p>
+
 </section>
+
+
+<!-- OVERVIEW ROW -->
 
 <div class="dashboard-grid">
 
 <div class="card">
+
 <h3>Selected Location</h3>
-<p id="dashboardLocation">No location selected</p>
+
+<p id="dashboardLocation">
+No location selected
+</p>
+
+<a href="selection.html">
+<button>Select / Change Location</button>
+</a>
+
 </div>
 
+
 <div class="card">
+
 <h3>Current Weather</h3>
-<p id="dashboardWeather">Loading weather...</p>
-</div>
+
+<p id="dashboardWeather">
+Loading weather...
+</p>
 
 </div>
 
-<div class="dashboard-row">
+</div>
+
+
+<!-- QUICK ACCESS -->
 
 <div class="card">
-<h3>Nearest Evacuation Centers</h3>
-<ul>
-<li>Open Court</li>
-<li>Multipurpose Hall</li>
-<li>Elementary School Covered Court</li>
-</ul>
+
+<h3>Quick Access</h3>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+<h4>Evacuation Map</h4>
+
+<p>
+View evacuation centers in your selected barangay.
+</p>
+
+<a href="map.html">
+<button>Open Map</button>
+</a>
+
 </div>
 
+
+<div class="feature-card">
+
+<h4>Preparedness Guide</h4>
+
+<p>
+See disaster preparedness guidance and safety advice.
+</p>
+
+<a href="disaster.html">
+<button>View Guide</button>
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h4>Weather Information</h4>
+
+<p>
+Check real-time weather conditions affecting your area.
+</p>
+
+<a href="map.html#weather">
+<button>View Weather</button>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- EMERGENCY TIPS -->
+
 <div class="card">
+
 <h3>Emergency Preparedness Tips</h3>
-<ul>
-<li>Prepare emergency kits</li>
-<li>Know evacuation routes</li>
-<li>Charge mobile devices before storms</li>
-<li>Follow LGU advisories</li>
-</ul>
+
+<div class="tips-grid">
+
+<div class="tip-card">
+Prepare emergency kits
+</div>
+
+<div class="tip-card">
+Know evacuation routes
+</div>
+
+<div class="tip-card">
+Charge mobile devices before storms
+</div>
+
+<div class="tip-card">
+Follow LGU advisories
+</div>
+
 </div>
 
 </div>
 
 </main>
 
+<footer>
+
+<p>ReadyNow © 2026</p>
+
+</footer>
+
 </div>
+
 
 <script>
 
-/* Load weather on dashboard */
+/* Load Weather */
 
 fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
 .then(res => res.json())
