@@ -3,49 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Evacuation Map – ReadyNow</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div class="sidebar">
 
-<div class="sidebar-logo">
-ReadyNow
-</div>
-
-<div class="sidebar-section">MAIN</div>
+<div class="sidebar-logo">ReadyNow</div>
 
 <ul class="sidebar-menu">
 <li><a href="dashboard.html">Dashboard</a></li>
 <li><a href="selection.html">Select Location</a></li>
-</ul>
-
-<div class="sidebar-section">INFORMATION</div>
-
-<ul class="sidebar-menu">
 <li><a href="map.html">Evacuation Information</a></li>
-<li><a href="map.html#weather">Weather Information</a></li>
-<li><a href="map.html#facilities">Evacuation Facilities</a></li>
-</ul>
-
-<div class="sidebar-section">SYSTEM</div>
-
-<ul class="sidebar-menu">
 <li><a href="about.html">About ReadyNow</a></li>
 </ul>
 
 </div>
 
-<div class="main-content">
 
 <header class="main-header">
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
 <div class="logo">ReadyNow</div>
+
 <nav>
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 </nav>
+
 </header>
+
 
 <main class="page-container">
 
@@ -54,27 +46,49 @@ ReadyNow
 <p>Stay informed. Stay prepared. Stay safe.</p>
 </section>
 
+
 <section class="info-grid">
 
 <div class="card" id="weather">
+
 <h3>Current Weather</h3>
-<p id="weatherText">Loading weather...</p>
+
+<p id="weatherText">
+Loading weather...
+</p>
+
 </div>
 
+
 <div class="card">
+
 <h3>Selected Location</h3>
-<p><strong>District:</strong> <span id="selectedDistrict"></span></p>
-<p><strong>Barangay:</strong> <span id="selectedBarangay"></span></p>
+
+<p>
+<strong>District:</strong>
+<span id="selectedDistrict"></span>
+</p>
+
+<p>
+<strong>Barangay:</strong>
+<span id="selectedBarangay"></span>
+</p>
+
 </div>
 
 </section>
 
+
 <div class="map-layout">
 
 <div class="card map-container">
+
 <h3>Evacuation Map</h3>
+
 <iframe id="mapFrame"></iframe>
+
 </div>
+
 
 <div class="facility-panel card" id="facilities">
 
@@ -85,6 +99,7 @@ ReadyNow
 </div>
 
 </div>
+
 
 <div class="card">
 
@@ -103,13 +118,22 @@ ReadyNow
 
 </main>
 
+
 <footer>
 <p>ReadyNow © 2026</p>
 </footer>
 
-</div>
 
 <script>
+
+/* SIDEBAR TOGGLE */
+
+function toggleSidebar(){
+document.querySelector(".sidebar").classList.toggle("open");
+}
+
+
+/* GET LOCATION FROM URL */
 
 const params = new URLSearchParams(window.location.search);
 const barangay = params.get("barangay");
@@ -117,6 +141,34 @@ const district = params.get("district");
 
 document.getElementById("selectedBarangay").innerText = barangay || "-";
 document.getElementById("selectedDistrict").innerText = district || "-";
+
+
+/* GOOGLE MAP */
+
+document.getElementById("mapFrame").src =
+`https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
+
+
+/* WEATHER */
+
+fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
+
+.then(res => res.json())
+
+.then(data => {
+
+if(data.main){
+
+document.getElementById("weatherText").innerHTML =
+
+`Temperature: ${data.main.temp}°C<br>
+Condition: ${data.weather[0].description}<br>
+Humidity: ${data.main.humidity}%<br>
+Wind Speed: ${data.wind.speed} m/s`;
+
+}
+
+});
 
 const evacuationData = {
 
@@ -808,25 +860,6 @@ const evacuationData = {
 
 };
 
-fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
-.then(res => res.json())
-.then(data => {
-
-if(data.main){
-
-document.getElementById("weatherText").innerHTML =
-`Temperature: ${data.main.temp}°C<br>
-Condition: ${data.weather[0].description}<br>
-Humidity: ${data.main.humidity}%<br>
-Wind Speed: ${data.wind.speed} m/s`;
-
-}
-
-});
-
-document.getElementById("mapFrame").src =
-`https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
-
 const list = document.getElementById("facilityList");
 
 if(evacuationData[barangay]){
@@ -840,19 +873,11 @@ card.className="facility-card";
 card.innerHTML = `
 <h4>${place}</h4>
 <p>Evacuation Facility</p>
-<button onclick="focusMap('${place}')">View on Map</button>
 `;
 
 list.appendChild(card);
 
 });
-
-}
-
-function focusMap(place){
-
-document.getElementById("mapFrame").src =
-`https://www.google.com/maps?q=${encodeURIComponent(place + ", Quezon City")}&output=embed`;
 
 }
 

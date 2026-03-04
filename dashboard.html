@@ -5,8 +5,8 @@
 <title>Dashboard - ReadyNow</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -15,33 +15,20 @@
 
 <div class="sidebar-logo">ReadyNow</div>
 
-<div class="sidebar-section">MAIN</div>
-
 <ul class="sidebar-menu">
 <li><a href="dashboard.html">Dashboard</a></li>
 <li><a href="selection.html">Select Location</a></li>
-</ul>
-
-<div class="sidebar-section">INFORMATION</div>
-
-<ul class="sidebar-menu">
 <li><a href="map.html">Evacuation Information</a></li>
-<li><a href="map.html#weather">Weather Information</a></li>
-<li><a href="map.html#facilities">Evacuation Facilities</a></li>
-</ul>
-
-<div class="sidebar-section">SYSTEM</div>
-
-<ul class="sidebar-menu">
 <li><a href="about.html">About ReadyNow</a></li>
 </ul>
 
 </div>
 
 
-<div class="main-content">
-
 <header class="main-header">
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
 <div class="logo">ReadyNow</div>
 
 <nav>
@@ -55,158 +42,53 @@
 <main class="page-container">
 
 <section class="hero">
-
 <h1>Dashboard</h1>
-<p>Your disaster readiness overview</p>
-
+<p>Latest disaster related news and alerts</p>
 </section>
 
 
-<!-- OVERVIEW ROW -->
-
-<div class="dashboard-grid">
-
 <div class="card">
 
-<h3>Selected Location</h3>
+<h3>Latest Disaster News</h3>
 
-<p id="dashboardLocation">
-No location selected
-</p>
-
-<a href="selection.html">
-<button>Select / Change Location</button>
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>Current Weather</h3>
-
-<p id="dashboardWeather">
-Loading weather...
-</p>
-
-</div>
-
-</div>
-
-
-<!-- QUICK ACCESS -->
-
-<div class="card">
-
-<h3>Quick Access</h3>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-
-<h4>Evacuation Map</h4>
-
-<p>
-View evacuation centers in your selected barangay.
-</p>
-
-<a href="map.html">
-<button>Open Map</button>
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h4>Preparedness Guide</h4>
-
-<p>
-See disaster preparedness guidance and safety advice.
-</p>
-
-<a href="disaster.html">
-<button>View Guide</button>
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h4>Weather Information</h4>
-
-<p>
-Check real-time weather conditions affecting your area.
-</p>
-
-<a href="map.html#weather">
-<button>View Weather</button>
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- EMERGENCY TIPS -->
-
-<div class="card">
-
-<h3>Emergency Preparedness Tips</h3>
-
-<div class="tips-grid">
-
-<div class="tip-card">
-Prepare emergency kits
-</div>
-
-<div class="tip-card">
-Know evacuation routes
-</div>
-
-<div class="tip-card">
-Charge mobile devices before storms
-</div>
-
-<div class="tip-card">
-Follow LGU advisories
-</div>
-
-</div>
+<ul id="newsList">
+<li>Loading news...</li>
+</ul>
 
 </div>
 
 </main>
 
+
 <footer>
-
 <p>ReadyNow © 2026</p>
-
 </footer>
-
-</div>
 
 
 <script>
 
-/* Load Weather */
+function toggleSidebar(){
+document.querySelector(".sidebar").classList.toggle("open");
+}
 
-fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
+/* DISASTER NEWS */
+
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en")
 .then(res => res.json())
 .then(data => {
 
-if(data.main){
+const list = document.getElementById("newsList");
+list.innerHTML="";
 
-document.getElementById("dashboardWeather").innerHTML =
-`Temperature: ${data.main.temp}°C<br>
-Condition: ${data.weather[0].description}<br>
-Humidity: ${data.main.humidity}%<br>
-Wind Speed: ${data.wind.speed} m/s`;
+data.items.slice(0,5).forEach(news=>{
 
-}
+const li=document.createElement("li");
+
+li.innerHTML=`<a href="${news.link}" target="_blank">${news.title}</a>`;
+
+list.appendChild(li);
+
+});
 
 });
 
