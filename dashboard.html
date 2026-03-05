@@ -13,7 +13,6 @@
 
 <body>
 
-
 <!-- SIDEBAR -->
 
 <div class="sidebar" id="sidebar">
@@ -61,7 +60,6 @@
 
 <main class="page-container">
 
-
 <section class="hero">
 
 <h1>Dashboard</h1>
@@ -70,8 +68,6 @@
 
 </section>
 
-
-<!-- NEWS SECTION -->
 
 <div class="card">
 
@@ -84,7 +80,6 @@ Loading latest disaster news...
 </div>
 
 </div>
-
 
 </main>
 
@@ -99,111 +94,100 @@ Loading latest disaster news...
 
 <script>
 
-
 /* SIDEBAR TOGGLE */
 
 function toggleSidebar(){
-
 document.getElementById("sidebar").classList.toggle("open");
-
 }
-
 
 
 /* CLOSE SIDEBAR WHEN CLICKING OUTSIDE */
 
-document.addEventListener("click", function(e){
+document.addEventListener("click",function(e){
 
 const sidebar = document.getElementById("sidebar");
-
 const menuBtn = document.querySelector(".menu-toggle");
 
 if(
-
 sidebar.classList.contains("open") &&
-
 !sidebar.contains(e.target) &&
-
 !menuBtn.contains(e.target)
-
 ){
-
 sidebar.classList.remove("open");
-
 }
 
 });
 
 
 
-/* LOAD DISASTER NEWS */
+/* ================= NEWS SYSTEM ================= */
 
-fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en"))
 
-.then(response => response.json())
+/* Try Google News first */
 
-.then(data => {
+function loadGoogleNews(){
+
+fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent("https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en"))
+
+.then(response => response.text())
+
+.then(str => {
 
 const parser = new DOMParser();
-
-const xml = parser.parseFromString(data.contents, "text/xml");
+const xml = parser.parseFromString(str,"text/xml");
 
 const items = xml.querySelectorAll("item");
 
-const newsList = document.getElementById("newsList");
+displayNews(items);
 
-newsList.innerHTML = "";
+})
 
+.catch(()=>{
 
-items.forEach((item, index) => {
+loadReliefWebNews();
 
-if(index >= 6) return;
-
-
-const title = item.querySelector("title").textContent;
-
-const link = item.querySelector("link").textContent;
-
-const description = item.querySelector("description").textContent;
-
-
-/* Extract image */
-
-let image = "";
-
-const imgMatch = description.match(/<img.*?src="(.*?)"/);
-
-if(imgMatch){
-
-image = imgMatch[1];
+});
 
 }
 
 
-/* Create card */
+/* Backup: ReliefWeb Disaster Reports */
+
+function loadReliefWebNews(){
+
+fetch("https://api.reliefweb.int/v1/reports?appname=ready-now&limit=6&profile=full&sort[]=date:desc")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+const newsList = document.getElementById("newsList");
+
+newsList.innerHTML="";
+
+data.data.forEach(article=>{
+
+const title = article.fields.title;
+const link = article.fields.url;
 
 const card = document.createElement("div");
+card.className="news-card";
 
-card.className = "news-card";
-
-card.innerHTML = `
-
+card.innerHTML=`
 <a href="${link}" target="_blank">
 
-<img src="${image}" alt="news image">
+<img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800" alt="news">
 
 <div class="news-content">
 
 <h4>${title}</h4>
 
-<p>Click to read full article</p>
+<p>ReliefWeb Disaster Report</p>
 
 </div>
 
 </a>
-
 `;
-
 
 newsList.appendChild(card);
 
@@ -218,6 +202,66 @@ document.getElementById("newsList").innerHTML =
 
 });
 
+}
+
+
+/* Display Google News */
+
+function displayNews(items){
+
+const newsList = document.getElementById("newsList");
+
+newsList.innerHTML="";
+
+items.forEach((item,index)=>{
+
+if(index>=6) return;
+
+const title = item.querySelector("title").textContent;
+const link = item.querySelector("link").textContent;
+const description = item.querySelector("description").textContent;
+
+let image="";
+
+const imgMatch = description.match(/<img.*?src="(.*?)"/);
+
+if(imgMatch){
+image = imgMatch[1];
+}else{
+image="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800";
+}
+
+const card = document.createElement("div");
+card.className="news-card";
+
+card.innerHTML=`
+
+<a href="${link}" target="_blank">
+
+<img src="${image}" alt="news">
+
+<div class="news-content">
+
+<h4>${title}</h4>
+
+<p>Click to read full article</p>
+
+</div>
+
+</a>
+
+`;
+
+newsList.appendChild(card);
+
+});
+
+}
+
+
+/* Start loading news */
+
+loadGoogleNews();
 
 </script>
 
