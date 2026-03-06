@@ -49,12 +49,39 @@
 
 <section class="info-grid">
 
+<!-- WEATHER CARD -->
+
 <div class="card">
 
 <h3>Current Weather</h3>
-<p id="weatherText">Loading weather...</p>
+
+<div id="weatherCard" class="weather-card">
+
+<div class="weather-top">
+
+<div>
+<h3 id="weatherCity">Quezon City</h3>
+<h1 id="weatherTemp">--°</h1>
+<p id="weatherDesc">Loading...</p>
+</div>
+
+<img id="weatherIcon" src="" alt="weather">
 
 </div>
+
+<div class="weather-extra">
+
+<span id="weatherHumidity"></span>
+<span id="weatherWind"></span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- LOCATION -->
 
 <div class="card">
 
@@ -67,6 +94,7 @@
 
 </section>
 
+
 <div class="map-layout">
 
 <div class="card map-container">
@@ -76,6 +104,7 @@
 <iframe id="mapFrame"></iframe>
 
 </div>
+
 
 <div class="facility-panel card">
 
@@ -89,15 +118,22 @@
 
 </main>
 
+
 <footer>
 <p>ReadyNow © 2026</p>
 </footer>
 
+
 <script>
+
+/* SIDEBAR */
 
 function toggleSidebar(){
 document.getElementById("sidebar").classList.toggle("open");
 }
+
+
+/* LOCATION */
 
 const params = new URLSearchParams(window.location.search);
 
@@ -107,12 +143,14 @@ const district = params.get("district");
 document.getElementById("selectedBarangay").innerText = barangay || "-";
 document.getElementById("selectedDistrict").innerText = district || "-";
 
-/* Map */
+
+/* GOOGLE MAP */
 
 document.getElementById("mapFrame").src =
 `https://www.google.com/maps?q=${encodeURIComponent(barangay + ", Quezon City")}&output=embed`;
 
-/* Weather */
+
+/* WEATHER */
 
 fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=metric&appid=585f6af2cbff1e00738777e8c9af0136")
 
@@ -122,11 +160,20 @@ fetch("https://api.openweathermap.org/data/2.5/weather?q=Quezon City,PH&units=me
 
 if(data.main){
 
-document.getElementById("weatherText").innerHTML =
-`Temperature: ${data.main.temp}°C<br>
-Condition: ${data.weather[0].description}<br>
-Humidity: ${data.main.humidity}%<br>
-Wind Speed: ${data.wind.speed} m/s`;
+document.getElementById("weatherTemp").innerText =
+Math.round(data.main.temp) + "°C";
+
+document.getElementById("weatherDesc").innerText =
+data.weather[0].description;
+
+document.getElementById("weatherHumidity").innerText =
+"Humidity: " + data.main.humidity + "%";
+
+document.getElementById("weatherWind").innerText =
+"Wind: " + data.wind.speed + " m/s";
+
+document.getElementById("weatherIcon").src =
+"https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
 
 }
 
