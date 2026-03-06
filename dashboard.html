@@ -25,11 +25,8 @@
 <ul class="sidebar-menu">
 
 <li><a href="dashboard.html">Dashboard</a></li>
-
 <li><a href="selection.html">Select Location</a></li>
-
 <li><a href="map.html">Evacuation Information</a></li>
-
 <li><a href="about.html">About ReadyNow</a></li>
 
 </ul>
@@ -60,14 +57,36 @@
 
 <main class="page-container">
 
+
 <section class="hero">
 
 <h1>Dashboard</h1>
 
-<p>Latest disaster-related news and updates</p>
+<p>Start by selecting your location to view evacuation information.</p>
 
 </section>
 
+
+<!-- SELECT LOCATION BUTTON -->
+
+<div class="card" style="text-align:center">
+
+<h3>Select Your Location</h3>
+
+<p>Choose your district and barangay to access evacuation maps and facilities.</p>
+
+<br>
+
+<a href="selection.html">
+<button style="font-size:16px;padding:14px 28px">
+Select Location
+</button>
+</a>
+
+</div>
+
+
+<!-- NEWS SECTION -->
 
 <div class="card">
 
@@ -80,6 +99,7 @@ Loading latest disaster news...
 </div>
 
 </div>
+
 
 </main>
 
@@ -119,11 +139,10 @@ sidebar.classList.remove("open");
 });
 
 
-
 /* ================= NEWS SYSTEM ================= */
 
 
-/* Try Google News first */
+/* Google News */
 
 function loadGoogleNews(){
 
@@ -151,7 +170,7 @@ loadReliefWebNews();
 }
 
 
-/* Backup: ReliefWeb Disaster Reports */
+/* Backup News */
 
 function loadReliefWebNews(){
 
@@ -174,6 +193,7 @@ const card = document.createElement("div");
 card.className="news-card";
 
 card.innerHTML=`
+
 <a href="${link}" target="_blank">
 
 <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800" alt="news">
@@ -187,6 +207,7 @@ card.innerHTML=`
 </div>
 
 </a>
+
 `;
 
 newsList.appendChild(card);
@@ -205,7 +226,7 @@ document.getElementById("newsList").innerHTML =
 }
 
 
-/* Display Google News */
+/* DISPLAY NEWS */
 
 function displayNews(items){
 
@@ -259,7 +280,7 @@ newsList.appendChild(card);
 }
 
 
-/* Start loading news */
+/* START NEWS */
 
 loadGoogleNews();
 
