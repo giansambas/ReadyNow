@@ -143,7 +143,11 @@ letter-spacing:-0.5px;
 font-size:18px;
 color:#555;
 margin-top:0;
-margin-bottom:0;
+margin-bottom:20px;
+}
+
+.hero button{
+margin-top:10px;
 }
 
 /* CARDS */
