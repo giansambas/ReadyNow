@@ -434,3 +434,25 @@ margin-top:30px;
 padding:14px 26px;
 font-size:15px;
 }
+
+.dashboard-return{
+text-align:center;
+margin-top:40px;
+}
+
+.dashboard-btn{
+font-size:18px;
+padding:16px 36px;
+border-radius:10px;
+background:#a8323e;
+color:white;
+border:none;
+cursor:pointer;
+transition:0.2s;
+}
+
+.dashboard-btn:hover{
+background:#8f2833;
+transform:translateY(-2px);
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
