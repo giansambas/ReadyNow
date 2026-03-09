@@ -182,13 +182,16 @@ sidebar.classList.remove("open");
 
 /* Google News */
 
-function loadGoogleNews(){
+async function loadGoogleNews(retry = 0){
 
-fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent("https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en"))
+try{
 
-.then(response => response.text())
+const res = await fetch(
+"https://api.allorigins.win/raw?url=" +
+encodeURIComponent("https://news.google.com/rss/search?q=philippines+disaster&hl=en-PH&gl=PH&ceid=PH:en")
+);
 
-.then(str => {
+const str = await res.text();
 
 const parser = new DOMParser();
 const xml = parser.parseFromString(str,"text/xml");
@@ -197,13 +200,16 @@ const items = xml.querySelectorAll("item");
 
 displayNews(items);
 
-})
+}
+catch(err){
 
-.catch(()=>{
-
+if(retry < 2){
+setTimeout(()=>loadGoogleNews(retry+1),2000);
+}else{
 loadReliefWebNews();
+}
 
-});
+}
 
 }
 
