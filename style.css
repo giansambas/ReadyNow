@@ -30,8 +30,7 @@ height:70px;
 background:#7b1e2b;
 display:flex;
 align-items:center;
-justify-content:space-between;
-padding:0 30px;
+justify-content:center;
 color:white;
 z-index:10;
 }
@@ -473,4 +472,13 @@ transition:0.2s;
 background:#8f2833;
 transform:translateY(-2px);
 box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+.header-container{
+width:100%;
+max-width:1200px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 30px;
 }
