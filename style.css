@@ -676,3 +676,34 @@ color:#555;
 .report-item small{
 color:#888;
 }
+
+/* DASHBOARD LAYOUT */
+
+.dashboard-grid{
+display:grid;
+grid-template-columns: 2fr 1fr;
+gap:25px;
+align-items:start;
+}
+
+.dashboard-left{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.dashboard-right{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+/* mobile layout */
+
+@media(max-width:900px){
+
+.dashboard-grid{
+grid-template-columns:1fr;
+}
+
+}

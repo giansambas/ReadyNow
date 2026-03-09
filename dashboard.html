@@ -60,17 +60,21 @@
 
 <main class="page-container">
 
-
 <section class="hero">
 
 <h1>Dashboard</h1>
-
 <p>Start by selecting your location to view evacuation information.</p>
 
 </section>
 
 
-<!-- SELECT LOCATION BUTTON -->
+<div class="dashboard-grid">
+
+<!-- LEFT SIDE -->
+
+<div class="dashboard-left">
+
+<!-- SELECT LOCATION -->
 
 <div class="card" style="text-align:center">
 
@@ -88,6 +92,9 @@ Select Location
 
 </div>
 
+
+<!-- REPORT DISASTER -->
+
 <div class="card report-card">
 
 <h3>Report a Disaster</h3>
@@ -103,25 +110,35 @@ Help the community by reporting floods, fires, landslides, or other emergencies 
 </div>
 
 
-<!-- NEWS SECTION -->
+<!-- NEWS -->
 
 <div class="card">
 
 <h3>Latest Disaster News</h3>
 
 <div id="newsList" class="news-grid">
-
 Loading latest disaster news...
-
 </div>
 
 </div>
+
+</div>
+
+
+<!-- RIGHT SIDE -->
+
+<div class="dashboard-right">
 
 <div class="card">
 
 <h3>Community Disaster Reports</h3>
 
 <div id="reports"></div>
+
+</div>
+
+</div>
+
 
 </div>
 
