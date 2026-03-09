@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Report Disaster</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="main-header">
+<div class="logo">ReadyNow</div>
+</header>
+
+<main class="page-container">
+
+<h1>Report a Disaster</h1>
+
+<div class="card">
+
+<label>Location</label>
+<input id="location">
+
+<label>Disaster Type</label>
+<select id="disaster">
+<option>Flood</option>
+<option>Fire</option>
+<option>Landslide</option>
+<option>Earthquake</option>
+</select>
+
+<label>Description</label>
+<textarea id="description"></textarea>
+
+<button onclick="submitReport()">Submit Report</button>
+
+<p id="status"></p>
+
+</div>
+
+</main>
+
+<script>
+
+async function submitReport(){
+
+const location = document.getElementById("location").value;
+const disaster = document.getElementById("disaster").value;
+const description = document.getElementById("description").value;
+
+const res = await fetch("/api/report",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body:JSON.stringify({ location, disaster, description })
+});
+
+const data = await res.json();
+
+document.getElementById("status").innerText = data.message;
+
+}
+
+</script>
+
+</body>
+</html>
