@@ -591,4 +591,32 @@ height:320px;
 max-height:320px;
 }
 
+.main-header{
+height:55px;
+padding:0 15px;
+}
+
+.logo{
+font-size:18px;
+}
+
+.menu-toggle{
+font-size:22px;
+left:15px;
+}
+
+.main-header nav{
+right:15px;
+}
+
+.main-header nav a{
+font-size:14px;
+margin-left:12px;
+}
+
+main{
+margin-top:70px;
+}
+
+
 }
