@@ -621,8 +621,58 @@ margin-top:70px;
 
 }
 
-.report-btn{
-background:#d64545;
-font-size:16px;
-padding:14px 24px;
+
+/* REPORT CARD CENTERING */
+
+.report-card{
+text-align:center;
+}
+
+/* MATCH BUTTON STYLE */
+
+.primary-btn{
+background:#a8323e;
+color:white;
+border:none;
+padding:12px 22px;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+}
+
+.primary-btn:hover{
+background:#922b35;
+}
+
+
+/* COMMUNITY REPORTS */
+
+#reports{
+margin-top:15px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+/* REPORT CARD */
+
+.report-item{
+background:white;
+padding:18px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.report-item h4{
+margin:0 0 8px 0;
+}
+
+.report-item p{
+margin:4px 0;
+font-size:14px;
+color:#555;
+}
+
+.report-item small{
+color:#888;
 }

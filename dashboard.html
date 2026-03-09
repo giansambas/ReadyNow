@@ -88,7 +88,7 @@ Select Location
 
 </div>
 
-<div class="card">
+<div class="card report-card">
 
 <h3>Report a Disaster</h3>
 
@@ -97,7 +97,7 @@ Help the community by reporting floods, fires, landslides, or other emergencies 
 </p>
 
 <a href="report.html">
-<button class="report-btn">Submit Disaster Report</button>
+<button class="primary-btn">Submit Disaster Report</button>
 </a>
 
 </div>
@@ -318,16 +318,30 @@ const container = document.getElementById("reports");
 
 container.innerHTML = "";
 
+/* show message if no reports */
+
+if(data.length === 0){
+
+container.innerHTML = `
+<p style="color:#777;">No community reports yet.</p>
+`;
+
+return;
+
+}
+
 data.reverse().forEach(r => {
 
 const div = document.createElement("div");
 
-div.className="facility-card";
+/* NEW CARD STYLE */
+
+div.className="report-item";
 
 div.innerHTML = `
-<strong>${r.disaster}</strong><br>
-${r.location}<br>
-${r.description}<br>
+<h4>${r.disaster}</h4>
+<p><strong>Location:</strong> ${r.location}</p>
+<p>${r.description}</p>
 <small>${r.time}</small>
 `;
 
