@@ -492,49 +492,103 @@ justify-content:space-between;
 padding:0 30px;
 }
 
-@media (max-width: 768px){
+/* ================= MOBILE LAYOUT FIX ================= */
+
+@media (max-width:768px){
+
+/* general spacing */
 
 .page-container{
-padding:30px 20px;
+padding:20px 16px;
 }
 
-/* HERO TEXT */
+/* hero section */
+
+.hero{
+padding:18px 10px;
+}
 
 .hero h1{
-font-size:32px;
+font-size:26px;
 }
 
 .hero p{
-font-size:16px;
-padding:0 10px;
+font-size:14px;
+line-height:1.4;
 }
 
-/* FEATURE CARDS STACK */
+/* buttons smaller */
+
+button{
+padding:10px 18px;
+font-size:14px;
+border-radius:8px;
+}
+
+/* cards smaller */
+
+.card{
+padding:18px;
+margin-bottom:18px;
+}
+
+/* feature cards stack */
 
 .feature-grid{
 grid-template-columns:1fr;
-gap:18px;
-margin-top:30px;
+gap:14px;
+margin-top:20px;
 }
-
-/* FEATURE CARD SIZE */
 
 .feature-card{
-padding:22px;
+padding:18px;
 }
 
-/* BUTTON SIZE */
+/* dashboard text */
 
-.hero button{
-padding:12px 22px;
+h1{
+font-size:28px;
+}
+
+h2{
+font-size:22px;
+}
+
+h3{
+font-size:18px;
+}
+
+/* news cards */
+
+.news-card img{
+height:140px;
+}
+
+.news-content h4{
 font-size:14px;
 }
 
-/* HEADER NAV SMALLER */
+/* weather card */
 
-.main-header nav a{
-margin-left:14px;
-font-size:14px;
+.weather-main{
+font-size:28px;
+}
+
+/* map layout */
+
+.map-layout{
+grid-template-columns:1fr;
+gap:20px;
+}
+
+.map-container iframe{
+height:320px;
+}
+
+/* facilities scroll shorter */
+
+.facility-panel{
+max-height:320px;
 }
 
 }
